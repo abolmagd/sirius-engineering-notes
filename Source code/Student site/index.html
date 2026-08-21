@@ -1,0 +1,2070 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta id="viewportMeta" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#0b0908">
+    <title>SIRIUS</title>
+    <meta name="description" content="SIRIUS - focused medical MCQ practice, live challenges, and progress tracking.">
+    <link rel="canonical" href="https://sirius-24.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SIRIUS">
+    <meta property="og:url" content="https://sirius-24.com/?v=6">
+    <meta property="og:title" content="SIRIUS | Medical MCQ Practice">
+    <meta property="og:description" content="Practice smarter, challenge friends live, and track your progress on SIRIUS.">
+    <meta property="og:image" content="https://sirius-24.com/social-preview-gold.png?v=6">
+    <meta property="og:image:secure_url" content="https://sirius-24.com/social-preview-gold.png?v=6">
+    <meta property="og:image:alt" content="The gold SIRIUS star mark on a black background">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SIRIUS | Medical MCQ Practice">
+    <meta name="twitter:description" content="Practice smarter, challenge friends live, and track your progress on SIRIUS.">
+    <meta name="twitter:image" content="https://sirius-24.com/social-preview-gold.png?v=6">
+    <link rel="manifest" href="manifest.json?v=6">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SIRIUS">
+    <script>
+      try {
+        var siriusStandalone = Boolean(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+        var viewportMeta = document.getElementById("viewportMeta");
+        // viewport-fit=cover in BOTH modes. A plain browser tab needs it too:
+        // without it the page stops at the notch's safe area, so the strip
+        // beside the notch and the screen's rounded corners are not page area
+        // at all and nothing we paint can ever reach them - which is exactly
+        // why those corners read as flat black. With cover the page spans the
+        // whole screen and the frosted strip can blur real content up there.
+        if (viewportMeta) viewportMeta.setAttribute("content", "width=device-width, initial-scale=1, viewport-fit=cover");
+        // Clamp rather than zero. Zeroing was the old defence against Safari
+        // reporting its own tab chrome as the inset (which shoved sticky glass
+        // far below the status bar), but it also leaves content that now
+        // genuinely extends under the status bar with no clearance at all. A
+        // ceiling keeps the pathological value out while still honouring a
+        // real notch - iOS status bars top out at 59pt.
+        document.documentElement.style.setProperty("--safe-top", "min(env(safe-area-inset-top, 0px), 60px)");
+        document.documentElement.classList.toggle("is-standalone-pwa", siriusStandalone);
+        document.documentElement.classList.toggle("is-browser-tab", !siriusStandalone);
+      } catch (_) {}
+    </script>
+    <link rel="apple-touch-icon" href="icon-192.png?v=6">
+    <link rel="icon" type="image/png" href="icon-192.png?v=6" sizes="192x192">
+    <!-- preload hrefs must byte-match the url() the stylesheet actually
+         requests (including query string) or the browser treats it as a
+         second, unrelated resource and downloads the font twice while the
+         preload itself goes unused - which is what was happening here
+         (style.min.css requests ?v=1, this preload asked for ?v=2). -->
+    <link rel="preload" href="phosphor/Phosphor.woff2?v=1" as="font" type="font/woff2" crossorigin>
+    <!-- Inlined from phosphor/style.min.css?v=3 (last of the render-blocking CSS;
+         610ms on Slow 4G). Font URLs rewritten to absolute so they still match
+         the preloads above. Re-inline here if the source file changes. -->
+    <style>@font-face{font-family:Phosphor;src:url(/phosphor/Phosphor.woff2?v=1) format("woff2");font-weight:400;font-style:normal;font-display:block}.ph{font-family:Phosphor!important;speak:never;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;letter-spacing:0;-webkit-font-feature-settings:"liga";-moz-font-feature-settings:"liga=1";-moz-font-feature-settings:"liga";-ms-font-feature-settings:"liga" 1;font-feature-settings:"liga";-webkit-font-variant-ligatures:discretionary-ligatures;font-variant-ligatures:discretionary-ligatures;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.ph.ph-activity:before{content:"\e000"}.ph.ph-arrow-circle-right:before{content:"\e02e"}.ph.ph-arrow-left:before{content:"\e058"}.ph.ph-arrow-right:before{content:"\e06c"}.ph.ph-arrow-square-out:before{content:"\e5de"}.ph.ph-arrows-clockwise:before{content:"\e094"}.ph.ph-arrows-down-up:before{content:"\e098"}.ph.ph-bookmark-simple:before{content:"\e0ea"}.ph.ph-books:before{content:"\e758"}.ph.ph-caret-left:before{content:"\e138"}.ph.ph-caret-right:before{content:"\e13a"}.ph.ph-chart-line-up:before{content:"\e156"}.ph.ph-chat-dots:before{content:"\e170"}.ph.ph-check:before{content:"\e182"}.ph.ph-check-circle:before{content:"\e184"}.ph.ph-check-square:before{content:"\e186"}.ph.ph-clipboard-text:before{content:"\e198"}.ph.ph-clock:before{content:"\e19a"}.ph.ph-copy:before{content:"\e1ca"}.ph.ph-database:before{content:"\e1de"}.ph.ph-dots-six-vertical:before{content:"\eae2"}.ph.ph-download-simple:before{content:"\e20c"}.ph.ph-envelope-simple:before{content:"\e218"}.ph.ph-exam:before{content:"\e742"}.ph.ph-export:before{content:"\eaf0"}.ph.ph-eye:before{content:"\e220"}.ph.ph-eye-slash:before{content:"\e224"}.ph.ph-file-csv:before{content:"\eb1c"}.ph.ph-fire:before{content:"\e242"}.ph.ph-flag:before{content:"\e244"}.ph.ph-flame:before{content:"\e624"}.ph.ph-floppy-disk:before{content:"\e248"}.ph.ph-folder-open:before{content:"\e256"}.ph.ph-gender-female:before{content:"\e6e0"}.ph.ph-gender-male:before{content:"\e6e2"}.ph.ph-graduation-cap:before{content:"\e62c"}.ph.ph-house:before{content:"\e2c2"}.ph.ph-image:before{content:"\e2ca"}.ph.ph-info:before{content:"\e2ce"}.ph.ph-key:before{content:"\e2d6"}.ph.ph-keyboard:before{content:"\e2d8"}.ph.ph-medal:before{content:"\e320"}.ph.ph-minus:before{content:"\e32a"}.ph.ph-moon-stars:before{content:"\e58e"}.ph.ph-note-pencil:before{content:"\e34c"}.ph.ph-paper-plane-tilt:before{content:"\e398"}.ph.ph-pause-circle:before{content:"\e3a0"}.ph.ph-pencil-simple:before{content:"\e3b4"}.ph.ph-percent:before{content:"\e3b6"}.ph.ph-play:before{content:"\e3d0"}.ph.ph-play-circle:before{content:"\e3d2"}.ph.ph-plus:before{content:"\e3d4"}.ph.ph-plus-circle:before{content:"\e3d6"}.ph.ph-question:before{content:"\e3e8"}.ph.ph-repeat:before{content:"\e3f6"}.ph.ph-shield-check:before{content:"\e40c"}.ph.ph-shuffle:before{content:"\e422"}.ph.ph-sign-in:before{content:"\e428"}.ph.ph-sign-out:before{content:"\e42a"}.ph.ph-squares-four:before{content:"\e464"}.ph.ph-star-four:before{content:"\e6a4"}.ph.ph-sun:before{content:"\e472"}.ph.ph-target:before{content:"\e47c"}.ph.ph-timer:before{content:"\e492"}.ph.ph-trash:before{content:"\e4a6"}.ph.ph-trophy:before{content:"\e67e"}.ph.ph-upload-simple:before{content:"\e4c0"}.ph.ph-user-minus:before{content:"\e4ce"}.ph.ph-user-plus:before{content:"\e4d0"}.ph.ph-users:before{content:"\e4d6"}.ph.ph-users-three:before{content:"\e68e"}.ph.ph-warning:before{content:"\e4e0"}.ph.ph-warning-circle:before{content:"\e4e2"}.ph.ph-wrench:before{content:"\e5d4"}.ph.ph-x:before{content:"\e4f6"}.ph.ph-x-circle:before{content:"\e4f8"}</style>
+    <link rel="preload" href="fonts/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Fraunces 650/latin is the H1 headline font on the very first screen
+         (auth/home hero). It's the largest CLS contributor (0.269 of 0.779
+         desktop) because without this preload it's only discovered after
+         fonts.min.css downloads and parses, arriving 2s+ into the load and
+         reflowing already-visible text. -->
+    <link rel="preload" href="fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Figtree is the body/navigation font on the first screen. Preloading
+         its latin face prevents the initial fallback font from flashing on
+         desktop while the inlined font stylesheet is parsed. -->
+    <link rel="preload" href="fonts/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Inlined from fonts/fonts.min.css?v=2 — same render-blocking rationale;
+         url(./…) rewritten to url(/fonts/…). Re-inline if fonts.css changes. -->
+    <style>@font-face{font-family:Amiri;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/amiri/v30/J7aRnpd8CGxBHpUrtLMA7w.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Amiri;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/amiri/v30/J7aRnpd8CGxBHpUgtLMA7w.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Amiri;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/amiri/v30/J7aRnpd8CGxBHpUutLM.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Amiri;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/amiri/v30/J7acnpd8CGxBHp2VkaY6zp5yGw.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Amiri;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/amiri/v30/J7acnpd8CGxBHp2VkaYxzp5yGw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Amiri;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/amiri/v30/J7acnpd8CGxBHp2VkaY_zp4.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Amiri Quran;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/amiriquran/v19/_Xmo-Hk0rD6DbUL4_vH8Zp5v5i2ssg.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Amiri Quran;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/amiriquran/v19/_Xmo-Hk0rD6DbUL4_vH8Zp5q5i0.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Cinzel;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/cinzel/v26/8vIJ7ww63mVu7gt7-GT7LEc.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Cinzel;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Cinzel;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/cinzel/v26/8vIJ7ww63mVu7gt7-GT7LEc.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Cinzel;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Figtree;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Figtree;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Figtree;font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Figtree;font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Figtree;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Figtree;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Figtree;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Figtree;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Figtree;font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Figtree;font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Fraunces;font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCBTeO-U.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:Fraunces;font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCFTeO-U.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Fraunces;font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Fraunces;font-style:normal;font-weight:650;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCBTeO-U.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:Fraunces;font-style:normal;font-weight:650;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCFTeO-U.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Fraunces;font-style:normal;font-weight:650;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Fraunces;font-style:normal;font-weight:750;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCBTeO-U.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:Fraunces;font-style:normal;font-weight:750;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCFTeO-U.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Fraunces;font-style:normal;font-weight:750;font-display:swap;src:url(/fonts/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj4wv4r4xA.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5Jv4r4xA.woff2) format("woff2");unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5bv4r4xA.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj47v4r4xA.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj41v4o.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj4wv4r4xA.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5Jv4r4xA.woff2) format("woff2");unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5bv4r4xA.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj47v4r4xA.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj41v4o.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:600;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj4wv4r4xA.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:600;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5Jv4r4xA.woff2) format("woff2");unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:600;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5bv4r4xA.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:600;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj47v4r4xA.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:600;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj41v4o.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj4wv4r4xA.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5Jv4r4xA.woff2) format("woff2");unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5bv4r4xA.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj47v4r4xA.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj41v4o.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj4wv4r4xA.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5Jv4r4xA.woff2) format("woff2");unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj5bv4r4xA.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj47v4r4xA.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Noto Sans Arabic;font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/notosansarabic/v33/nwpCtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlj41v4o.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Fraunces Fallback;src:local("Georgia"),local("Tinos"),local("Liberation Serif"),local("Nimbus Roman"),local("DejaVu Serif");size-adjust:137.63%;ascent-override:71.06%;descent-override:18.53%;line-gap-override:0%}@font-face{font-family:Cinzel Fallback;src:local("Georgia"),local("Tinos"),local("Liberation Serif"),local("Nimbus Roman"),local("DejaVu Serif");size-adjust:150.02%;ascent-override:65.06%;descent-override:24.8%;line-gap-override:0%}@font-face{font-family:Figtree Fallback;src:local("Arial"),local("Arimo"),local("Liberation Sans"),local("Nimbus Sans"),local("DejaVu Sans"),local("Helvetica");size-adjust:120.07%;ascent-override:79.12%;descent-override:20.82%;line-gap-override:0%}</style>
+    <script>
+      // Apply stored interface preferences before first paint so theme, font
+      // size, and brightness never flash. Mirrors the clamps in app.js; kept
+      // dependency-free and defensive so a bad blob can never block boot.
+      try {
+        var root = document.documentElement;
+        var savedTheme = localStorage.getItem("sirius.theme");
+        root.dataset.theme = savedTheme === "dark" ? "amoled" : (["light", "amoled", "ink-sky"].includes(savedTheme) ? savedTheme : "amoled");
+        // A plain browser tab can't extend page content under the iOS status
+        // bar (only the installed PWA can), so theme-color - which tints
+        // Safari/Chrome's own chrome there - is the only lever available.
+        // Sync it here, before first paint, so that strip matches the actual
+        // theme instead of sitting on the static dark-brown fallback below.
+        var themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        var themeColors = { light: "#f7f5ef", amoled: "#000000", "ink-sky": "#55585e" };
+        if (themeColorMeta) themeColorMeta.setAttribute("content", themeColors[root.dataset.theme] || themeColors.amoled);
+        window.__siriusLoadInkSkyCss = function () {
+          if (document.getElementById("inkSkyStyles")) return;
+          var link = document.createElement("link");
+          link.id = "inkSkyStyles";
+          link.rel = "stylesheet";
+          link.href = "ink-sky.css?v=1";
+          document.head.appendChild(link);
+        };
+        if (root.dataset.theme === "ink-sky") window.__siriusLoadInkSkyCss();
+        var prefs = {};
+        try { prefs = JSON.parse(localStorage.getItem("sirius.prefs")) || {}; } catch (_) {}
+        var clamp = function (v, lo, hi, dflt) { v = Number(v); return isFinite(v) ? Math.min(hi, Math.max(lo, v)) : dflt; };
+        root.style.setProperty("--ui-font-scale", clamp(prefs.fontScale, 0.85, 1.35, 1));
+        var b = clamp(prefs.brightness, 0.7, 1.15, 1);
+        if (b < 1) {
+          root.style.setProperty("--veil-color", "#000");
+          root.style.setProperty("--veil-blend", "normal");
+          root.style.setProperty("--veil-opacity", ((1 - b) * 0.9).toFixed(3));
+        } else if (b > 1) {
+          root.style.setProperty("--veil-color", "#fff");
+          root.style.setProperty("--veil-blend", "soft-light");
+          root.style.setProperty("--veil-opacity", ((b - 1) * 2).toFixed(3));
+        }
+      } catch (_) {}
+    </script>
+    <script>
+      // Resolves once the non-render-blocking main stylesheet has applied, so
+      // the boot skeleton is never lifted (revealing the real UI) before its
+      // styling is ready. Defined before the <link> so the onload can call it.
+      window.__siriusMainCssReady = (function () {
+        var resolve;
+        var p = new Promise(function (r) { resolve = r; });
+        p.resolve = resolve;
+        return p;
+      })();
+    </script>
+    <style>
+      /* ── Critical boot CSS ──────────────────────────────────────────────
+         Inlined so the full-screen boot skeleton paints immediately while
+         styles.min.css loads WITHOUT blocking render (its <link> follows this
+         block). Theme variable values are the computed winners from
+         styles.min.css — amoled is the default set by the pre-paint script
+         above; keep them in sync if the palette changes. Because styles.min.css
+         comes later in source order it overrides everything here once applied,
+         so this block is only a first-paint bridge. The skeleton (z-index:9000)
+         covers the real UI until app.js finishes booting AND this stylesheet has
+         applied (gated in finishInitialLoad), so nothing paints unstyled. */
+      :root{--bg:#f7f5ef;--surface:#fffefa;--surface-soft:#f0ece2;--surface-strong:#e5ded0;--line:#d7cdbb;--accent:#c99b3d;--text:#15120e;--shadow:0 30px 70px -28px rgba(78,56,16,.34),0 8px 20px -12px rgba(78,56,16,.18);--font-sans:"Figtree","Figtree Fallback","Noto Sans",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+      [data-theme="light"]{--bg:#f7f5ef;--surface:#fffefa;--surface-soft:#f0ece2;--surface-strong:#e5ded0;--line:#d7cdbb;--accent:#c99b3d;--text:#15120e;--shadow:0 30px 70px -28px rgba(78,56,16,.34),0 8px 20px -12px rgba(78,56,16,.18)}
+      [data-theme="amoled"]{--bg:#000;--surface:#1a1a1a;--surface-soft:#202020;--surface-strong:#262626;--line:#333;--accent:#d2aa5c;--text:#f2f2f0;--shadow:0 20px 52px -28px rgba(0,0,0,.55),0 6px 16px -10px rgba(0,0,0,.4)}
+      [data-theme="ink-sky"]{--bg:#55585e;--surface:#55585e;--surface-soft:#8e9094;--surface-strong:#55585e;--line:#8e9094;--accent:#c4c6c9;--text:#f2f2f0;--shadow:0 24px 60px -28px rgba(29,31,34,.72),0 8px 18px -12px rgba(29,31,34,.5)}
+      *{box-sizing:border-box}
+      html{min-height:100%;font-size:calc(16px * var(--ui-font-scale,1))}
+      body{margin:0;min-height:100dvh;overflow-x:hidden;background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent) 16%,transparent),transparent 34rem),linear-gradient(135deg,var(--bg),var(--surface-soft));color:var(--text);font-family:var(--font-sans);font-size:1rem;line-height:1.5}
+      /* Keep the app's initially-hidden views collapsed during the brief window
+         before styles.min.css applies, so unstyled content can't expand the
+         layout behind the skeleton. Mirrors styles.css .hidden exactly. */
+      .hidden{display:none !important}
+      /* ── CLS guard ───────────────────────────────────────────────────────
+         Layout-shift scoring ignores occlusion: while the opaque boot skeleton
+         covers the screen, JS reveals the auth/home view underneath and the
+         footer jumps from just-below-the-topbar to the bottom of the page —
+         Lighthouse counted that hidden-from-the-user jump as the desktop CLS
+         of ~0.51 that survived every font fix. visibility:hidden elements are
+         excluded from shift scoring AND keep their layout space, so hide the
+         moving regions (main content + footer) until boot completes, then
+         reveal them already in their final position — zero recorded shift.
+         The topbar stays visible: it never moves, and its logo/brand text is
+         the early LCP candidate — hiding it would push LCP out to JS-boot
+         time and wreck the mobile score. finishInitialLoad() adds .boot-done
+         when the skeleton lifts; the timer below is a belt-and-braces reveal
+         in case app.js dies after this inline script already ran. */
+      #mainContent,.app-footer{visibility:hidden}
+      body.boot-done #mainContent,body.boot-done .app-footer{visibility:visible}
+      /* ── Topbar geometry pin ─────────────────────────────────────────────
+         The topbar is the one region that stays VISIBLE during boot (its
+         brand logo/text is the early LCP candidate), so unlike #mainContent
+         it cannot hide behind the CLS guard above. Without these rules it
+         first paints as an unstyled full-width block and then snaps into its
+         real centered/sticky layout the moment styles.min.css applies —
+         the trace showed exactly that: (0,0,1350,91) → (28,0,1294,~) at CSS
+         apply time, the surviving desktop CLS. These are copies of the FINAL
+         computed winners from styles.css (the later "redesign" overrides, not
+         the base rules); keep in sync if the topbar layout changes. */
+      .app-shell{position:relative;z-index:1;width:min(1360px,calc(100% - 56px));min-height:0;display:flex;flex-direction:column;margin:0 auto;padding:calc(22px + var(--safe-top,0px)) 0 0}
+      #mainContent{flex:0 0 auto;display:block;min-height:0}
+      #mainContent>section{align-self:start}
+      .topbar{position:sticky;top:calc(17px + var(--safe-top,0px));z-index:20;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;border-radius:8px;padding:10px 14px;background:color-mix(in srgb,var(--surface) 56%,transparent);-webkit-backdrop-filter:blur(34px) saturate(190%);backdrop-filter:blur(34px) saturate(190%);box-shadow:0 18px 48px rgba(42,34,22,.08)}
+      [data-theme="amoled"] .topbar{background:rgba(13,11,9,.62);box-shadow:0 18px 52px rgba(0,0,0,.62)}
+      .brand{display:inline-flex;align-items:center;gap:14px;color:inherit;text-decoration:none}
+      .brand-mark{display:grid;width:46px;height:46px;place-items:center;border-radius:8px;background:transparent}
+      .brand-mark img{width:28px;height:36px;object-fit:contain}
+      .brand strong,.brand small{display:block}
+      .topbar-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+      .auth-theme-switch{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:4px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+      .auth-theme-option{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border:0;border-radius:999px;background:transparent;font:inherit;font-size:0.82rem;font-weight:600;line-height:1;cursor:pointer}
+      @media(max-width:1360px){.app-shell{width:min(100% - 32px,1360px)}.topbar{top:calc(10px + var(--safe-top,0px));flex-wrap:wrap;align-items:flex-start}}
+      @media(max-width:720px){.app-shell{width:min(100% - 24px,1360px);padding-top:calc(12px + var(--safe-top,0px))}}
+    </style>
+    <script>window.setTimeout(function(){document.body&&document.body.classList.add("boot-done")},8000)</script>
+    <noscript><style>#mainContent,.app-footer{visibility:visible}</style></noscript>
+    <style>
+      /* The decorative full-screen backdrops are position:fixed in the full CSS.
+         Pin them fixed here too so they don't start in normal flow and then jump
+         out of it when styles.min.css applies — that jump was a large layout
+         shift (desktop CLS). auth-flow layers stay display:none until the full
+         CSS reveals them on the auth/home views. */
+      .cosmos-backdrop,.auth-flow-canvas,.auth-flow-grain,.grain-overlay{position:fixed;inset:0;pointer-events:none}
+      .auth-flow-canvas,.auth-flow-grain{display:none}
+      #screenVeil{position:fixed;inset:0;z-index:2147483000;pointer-events:none;background:var(--veil-color,#000);mix-blend-mode:var(--veil-blend,normal);opacity:var(--veil-opacity,0)}
+      /* Boot-skeleton HOST rules only. The skeleton's inner markup and all of
+         its inner CSS live in a closed-over Shadow DOM (built by the inline
+         script right after the #bootSkeleton div) precisely so that
+         styles.min.css can never re-style the skeleton's contents when it
+         arrives: the desktop PageSpeed runs kept recording a large layout
+         shift from nodes that were later removed from the DOM — the skeleton's
+         own children reflowing at main-stylesheet-apply time, behind the
+         opaque overlay where no user ever sees it. Shadow isolation makes that
+         reflow structurally impossible instead of whack-a-mole patching
+         whichever rule drifted. The host itself is fixed inset:0 and never
+         moves; styles.css keeps an identical host rule, which is harmless. */
+      .boot-skeleton{position:fixed;inset:0;z-index:9000;overflow:auto;background:radial-gradient(52% 42% at 82% 4%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 62%),var(--bg);opacity:1;transition:opacity 220ms ease,visibility 220ms ease}
+      .boot-skeleton.is-leaving{visibility:hidden;opacity:0;pointer-events:none}
+      @media (prefers-reduced-motion:reduce){.boot-skeleton{transition:none}}
+    </style>
+    <link rel="preload" href="styles.min.css?v=293" as="style" id="mainStyles" onload="this.onload=null;this.rel='stylesheet';window.__siriusMainCssReady&&window.__siriusMainCssReady.resolve()">
+    <noscript><link rel="stylesheet" href="styles.min.css?v=293"></noscript>
+    <style>
+      .maintenance-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;padding:24px}
+      .maintenance-overlay.hidden{display:none}
+      .maintenance-card{text-align:center;max-width:480px;padding:48px 40px;background:#0d1115;border:1px solid #1a2430;border-radius:20px;box-shadow:0 40px 100px rgba(0,0,0,.8)}
+      .maintenance-icon{width:72px;height:72px;background:#1a2430;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:32px}
+      .maintenance-card h1{font-size:1.8rem;color:#f4fbff;margin:0 0 12px}
+      .maintenance-message{color:#9ab7c2;line-height:1.6;margin:0 0 24px;font-size:1rem}
+      .maintenance-footer{margin:24px 0 0;font-size:.85rem;color:#5a7a85}
+      .maintenance-footer a{color:#d2aa5c;text-decoration:none;font-weight:600}
+      .maintenance-footer a:hover{color:#f2d390}
+      .maintenance-pulse{display:inline-block;width:10px;height:10px;background:#ffd166;border-radius:50%;margin-right:8px;animation:mpulse 2s ease-in-out infinite}
+      @keyframes mpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+      /* ── Feedback modal ── */
+      .abolmagd-link{background:none;border:none;padding:0;color:inherit;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+      .abolmagd-link:hover{color:var(--accent)}
+
+      #feedbackModal, #surveyModal{
+        border:1px solid var(--line);
+        border-radius:var(--radius-lg);
+        padding:0;
+        background:var(--surface);
+        color:var(--text);
+        box-shadow:var(--shadow),0 0 0 1px color-mix(in srgb,var(--accent) 10%,transparent);
+        width:min(400px,92vw);
+        max-height:min(560px,88dvh);
+        overflow:hidden;
+        margin:auto;
+      }
+      #feedbackModal[open], #surveyModal[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;animation:fbIn .22s cubic-bezier(0.22,1,0.36,1)}
+      @keyframes fbIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+      #feedbackModal::backdrop, #surveyModal::backdrop{background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(6px)}
+
+      .fb-header{
+        display:flex;align-items:center;justify-content:space-between;
+        padding:16px 20px 14px;
+        border-bottom:1px solid var(--line);
+        flex-shrink:0;
+        background:color-mix(in srgb,var(--accent) 5%,var(--surface));
+      }
+      .fb-header-left{display:flex;align-items:center;gap:9px}
+      .fb-icon{
+        width:30px;height:30px;border-radius:8px;
+        background:color-mix(in srgb,var(--accent) 14%,transparent);
+        border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);
+        color:var(--accent);
+        display:flex;align-items:center;justify-content:center;
+        font-size:1rem;flex-shrink:0;
+      }
+      .fb-header h2{font-size:.95rem;font-weight:700;margin:0;letter-spacing:-.01em}
+      .fb-close{
+        width:26px;height:26px;border-radius:7px;
+        border:1px solid var(--line);
+        background:none;color:var(--muted);cursor:pointer;
+        font-size:.8rem;display:flex;align-items:center;justify-content:center;
+        transition:background .15s,color .15s;flex-shrink:0;
+      }
+      .fb-close:hover{background:var(--surface-soft);color:var(--text)}
+
+      .fb-body{padding:16px 20px;overflow-y:auto;min-height:0;overscroll-behavior:contain}
+      .fb-sub{font-size:.8rem;color:var(--muted);margin:0 0 14px;line-height:1.5}
+      .fb-group{margin-bottom:12px}
+      .fb-group label{
+        display:block;font-size:.7rem;font-weight:600;
+        color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px;
+      }
+      .fb-input,.fb-textarea{
+        width:100%;padding:9px 12px;
+        background:var(--surface-soft);
+        border:1px solid var(--line);
+        border-radius:var(--radius-sm);
+        color:var(--text);font:inherit;font-size:.855rem;
+        transition:border-color .18s,box-shadow .18s;
+      }
+      .fb-input:focus,.fb-textarea:focus{
+        outline:none;
+        border-color:var(--accent);
+        box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent);
+      }
+      .fb-textarea{resize:vertical;min-height:90px;line-height:1.55}
+      .fb-error{font-size:.78rem;color:var(--danger);margin:0 0 8px;min-height:14px}
+      .fb-screenshot-option{
+        display:flex;align-items:flex-start;gap:9px;padding:10px 11px;
+        border:1px solid var(--line);border-radius:var(--radius-sm);
+        background:color-mix(in srgb,var(--surface-soft) 75%,transparent);
+        cursor:pointer;
+      }
+      .fb-screenshot-option input{width:16px;height:16px;margin:2px 0 0;accent-color:var(--accent);flex:0 0 auto}
+      .fb-screenshot-copy{min-width:0}
+      .fb-screenshot-copy strong,.fb-screenshot-copy small{display:block}
+      .fb-screenshot-copy strong{font-size:.8rem;color:var(--text)}
+      .fb-screenshot-copy small{margin-top:3px;font-size:.72rem;line-height:1.45;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400}
+
+      .fb-footer{
+        display:flex;justify-content:flex-end;gap:8px;
+        padding:12px 20px;
+        border-top:1px solid var(--line);
+        flex-shrink:0;
+        background:color-mix(in srgb,var(--surface-soft) 60%,var(--surface));
+      }
+      .fb-btn-cancel{
+        padding:7px 15px;border-radius:var(--radius-sm);
+        border:1px solid var(--line);background:none;
+        color:var(--muted);font:inherit;font-size:.84rem;cursor:pointer;
+        transition:background .15s,color .15s;
+      }
+      .fb-btn-cancel:hover{background:var(--surface-soft);color:var(--text)}
+      .fb-btn-submit{
+        padding:7px 18px;border-radius:var(--radius-sm);
+        border:none;background:var(--accent);color:#000;
+        font:inherit;font-size:.84rem;font-weight:600;cursor:pointer;
+        transition:background .15s,opacity .15s;
+      }
+      .fb-btn-submit:hover{background:var(--accent-strong,#f2d390);opacity:.92}
+
+      /* ── Survey modal (hero banner) ── */
+      .sv-hero{
+        position:relative;
+        height:84px;flex-shrink:0;
+        display:flex;align-items:center;justify-content:center;
+        background:
+          radial-gradient(120% 160% at 30% 0%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%),
+          linear-gradient(160deg, color-mix(in srgb, var(--surface-soft) 90%, var(--accent) 10%), var(--surface));
+        border-bottom:1px solid var(--line);
+      }
+      .sv-hero-icon{
+        width:44px;height:44px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;
+        background:color-mix(in srgb, var(--accent) 16%, transparent);
+        border:1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+        color:var(--accent);font-size:1.4rem;
+      }
+      .sv-close{
+        position:absolute;top:10px;inset-inline-start:10px;
+        width:26px;height:26px;border-radius:7px;
+        border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 70%, transparent);
+        color:var(--muted);cursor:pointer;
+        display:flex;align-items:center;justify-content:center;font-size:.8rem;
+        transition:background .15s,color .15s;
+      }
+      .sv-close:hover{background:var(--surface-soft);color:var(--text)}
+      .sv-body{text-align:center}
+      .sv-title{font-size:1.05rem;font-weight:800;margin:0 0 8px;letter-spacing:-.01em}
+      .sv-copy{margin:0 0 14px}
+      .sv-copy p{font-size:.83rem;color:var(--muted);line-height:1.65;margin:0 0 8px}
+      .sv-copy p:last-child{margin-bottom:0}
+      .sv-footer{display:flex;flex-direction:column;gap:6px;padding:0 20px 18px;flex-shrink:0}
+      .sv-submit{
+        width:100%;padding:11px;border-radius:var(--radius-sm);
+        border:none;background:var(--accent);color:#171109;
+        font:inherit;font-size:.85rem;font-weight:800;cursor:pointer;
+        transition:background .15s,opacity .15s;
+      }
+      .sv-submit:hover{background:var(--accent-strong,#f2d390);opacity:.92}
+      .sv-skip{
+        width:100%;padding:6px;border:none;background:none;
+        color:var(--muted);font:inherit;font-size:.78rem;
+        text-decoration:underline;text-underline-offset:3px;cursor:pointer;
+      }
+      .sv-skip:hover{color:var(--text)}
+      #surveyModal.survey-mandatory .sv-close,
+      #surveyModal.survey-mandatory .sv-skip{display:none}
+
+      .student-rank-banner{
+        display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:13px;
+        margin:18px 0 20px;padding:13px 16px;
+        border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));
+        border-radius:14px;
+        background:linear-gradient(110deg,color-mix(in srgb,var(--accent) 13%,var(--surface)),color-mix(in srgb,var(--surface-soft) 82%,transparent));
+        box-shadow:inset 0 1px color-mix(in srgb,#fff 16%,transparent),0 14px 30px -24px color-mix(in srgb,var(--accent) 60%,transparent);
+      }
+      .student-rank-icon{display:grid;width:42px;height:42px;place-items:center;border-radius:12px;background:var(--accent);color:#171109;font-size:1.25rem}
+      .student-rank-copy{min-width:0}
+      .student-rank-copy span,.student-rank-copy small{display:block}
+      .student-rank-copy span{font-size:.72rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-strong)}
+      .student-rank-copy small{margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-weight:700}
+      .student-rank-number{text-align:right;font-variant-numeric:tabular-nums}
+      .student-rank-number strong,.student-rank-number small{display:block}
+      .student-rank-number strong{font-family:var(--font-display,var(--font-sans));font-size:1.8rem;line-height:1;color:var(--text)}
+      .student-rank-number small{margin-top:4px;color:var(--muted);font-size:.72rem;font-weight:800}
+
+      @media(max-width:600px){
+        #feedbackModal, #surveyModal{
+          width:auto;max-width:none;
+          height:min(460px,calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px));
+          max-height:none;
+          border-radius:20px;
+          position:fixed;
+          inset:auto 8px max(8px,env(safe-area-inset-bottom)) 8px;
+          margin:0;
+        }
+        .fb-header{padding:15px 16px 13px}
+        .fb-body{padding:14px 16px}
+        .fb-footer{
+          padding:12px 16px;
+        }
+        .fb-btn-cancel,.fb-btn-submit{min-height:44px;padding-inline:18px}
+        .fb-input,.fb-textarea{font-size:16px}
+        .student-rank-banner{margin:14px 0 18px;padding:12px 13px;gap:11px}
+        .student-rank-icon{width:38px;height:38px;border-radius:11px}
+        .student-rank-number strong{font-size:1.55rem}
+      }
+    </style>
+  </head>
+  <body aria-busy="true">
+    <!-- Maintenance mode overlay (shown by app.js when sirius.maintenance.enabled is true) -->
+    <div class="maintenance-overlay hidden" id="maintenanceOverlay" role="alert" aria-live="assertive">
+      <div class="maintenance-card">
+        <div class="maintenance-icon">
+          <i class="ph ph-wrench" aria-hidden="true"></i>
+        </div>
+        <h1>Under Maintenance</h1>
+        <p class="maintenance-message">The platform is temporarily under maintenance. Please check back soon.</p>
+        <p class="maintenance-footer">
+          <span class="maintenance-pulse" aria-hidden="true"></span>
+          We'll be back shortly
+        </p>
+      </div>
+    </div>
+
+    <div class="boot-skeleton" id="bootSkeleton" aria-hidden="true"></div>
+    <script>
+      // Build the skeleton's contents inside a Shadow DOM so no document
+      // stylesheet (styles.min.css in particular) can ever re-style them —
+      // see the host-rule comment in the critical CSS block. Runs synchronously
+      // right after the host div so the skeleton is part of the first paint.
+      // If attachShadow is unavailable the host still paints its background
+      // gradient and app.js dismisses it normally — just without the shimmer.
+      (function () {
+        var host = document.getElementById("bootSkeleton");
+        if (!host || !host.attachShadow) return;
+        try {
+          var root = host.attachShadow({ mode: "open" });
+          root.innerHTML =
+            '<style>' +
+            // font-size/line-height zero: the skeleton renders no text, but its
+            // inline elements would otherwise derive line-box heights from the
+            // inherited webfont — so the whole skeleton reflowed a few px the
+            // moment Figtree finished loading, which Lighthouse recorded as a
+            // large "Web font loaded" layout shift from nodes it could not
+            // name (shadow / removed). Zeroing the font metrics makes the
+            // skeleton's geometry fully font-independent.
+            ':host{font-size:0;line-height:0}' +
+            '.boot-skeleton-heading>span{display:block}' +
+            '.boot-skeleton-shell{width:min(1360px,calc(100% - 56px));margin:0 auto;padding:20px 0 64px}' +
+            '.boot-skeleton-topbar{min-height:70px;display:grid;grid-template-columns:minmax(180px,1fr) auto minmax(52px,1fr);align-items:center;gap:18px;padding:10px 14px;margin-bottom:22px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--surface) 92%,transparent);box-shadow:0 18px 48px rgba(42,34,22,.08)}' +
+            '.boot-skeleton-brand,.boot-skeleton-brand-lines,.boot-skeleton-heading{display:flex;align-items:center}' +
+            '.boot-skeleton-brand{gap:12px}' +
+            '.boot-skeleton-brand-lines{align-items:flex-start;flex-direction:column;gap:7px}' +
+            '.boot-skeleton-heading{justify-content:space-between;gap:20px}' +
+            '.boot-skeleton-heading>span{width:min(420px,72%)}' +
+            '.boot-skeleton-nav{display:flex;gap:7px}' +
+            '.boot-skeleton-nav .skeleton-block{width:82px;height:42px;border-radius:7px}' +
+            '.skeleton-block{position:relative;display:block;overflow:hidden;background:color-mix(in srgb,var(--surface-strong) 78%,var(--line))}' +
+            '.skeleton-block::after{content:"";position:absolute;inset:0;transform:translateX(-110%);background:linear-gradient(100deg,transparent 20%,color-mix(in srgb,var(--text) 9%,transparent) 48%,transparent 76%);animation:skeletonShimmer 1.45s ease-in-out infinite}' +
+            '.skeleton-logo{width:46px;height:46px;border-radius:8px}' +
+            '.skeleton-action{width:44px;height:44px;border-radius:8px;justify-self:end}' +
+            '.skeleton-line{height:11px;margin-top:9px;border-radius:999px}' +
+            '.skeleton-line-xs{width:32%;min-width:74px}' +
+            '.skeleton-line-sm{width:46%}' +
+            '.skeleton-line-md{width:64%;min-width:110px}' +
+            '.skeleton-line-lg{width:88%;min-width:160px;height:22px}' +
+            '.boot-skeleton-page{display:grid;grid-template-columns:minmax(260px,0.72fr) minmax(0,1.58fr);gap:18px;min-height:610px}' +
+            '.skeleton-panel{border:1px solid color-mix(in srgb,var(--line) 86%,transparent);border-radius:8px;background:color-mix(in srgb,var(--surface) 94%,transparent);box-shadow:var(--shadow)}' +
+            '.boot-skeleton-rail,.boot-skeleton-content{padding:clamp(22px,3vw,38px)}' +
+            '.boot-skeleton-rail-card{display:grid;gap:14px;margin-top:58px}' +
+            '.skeleton-field{width:100%;height:50px;border-radius:7px}' +
+            '.boot-skeleton-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:42px}' +
+            '.boot-skeleton-cards .skeleton-block{height:116px;border-radius:8px}' +
+            '.boot-skeleton-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}' +
+            '.boot-skeleton-rows{display:grid;gap:12px;margin-top:26px}' +
+            '.boot-skeleton-rows .skeleton-block{height:58px;border-radius:7px}' +
+            ':host([data-layout="home"]) .boot-skeleton-page,:host([data-layout="auth"]) .boot-skeleton-page{width:min(100%,1180px);grid-template-columns:minmax(0,1.08fr) minmax(340px,0.62fr);margin:clamp(18px,4vh,52px) auto 0}' +
+            ':host([data-layout="home"]) .boot-skeleton-rail-card,:host([data-layout="auth"]) .boot-skeleton-rail-card{margin-top:100px}' +
+            ':host([data-layout="quiz"]) .boot-skeleton-page{grid-template-columns:1fr}' +
+            ':host([data-layout="quiz"]) .boot-skeleton-rail{display:none}' +
+            ':host([data-layout="quiz"]) .boot-skeleton-content{width:min(100%,940px);justify-self:center}' +
+            ':host([data-layout="quiz"]) .boot-skeleton-cards{grid-template-columns:1fr}' +
+            ':host([data-layout="quiz"]) .boot-skeleton-cards .skeleton-block{height:190px}' +
+            ':host([data-layout="list"]) .boot-skeleton-page{grid-template-columns:1fr}' +
+            ':host([data-layout="list"]) .boot-skeleton-rail{display:none}' +
+            '@keyframes skeletonShimmer{to{transform:translateX(110%)}}' +
+            '@media (max-width:820px){.boot-skeleton-shell{width:min(100% - 24px,1360px);padding-top:12px}.boot-skeleton-topbar{grid-template-columns:1fr auto;margin-bottom:14px}.boot-skeleton-nav{display:none}.boot-skeleton-page,:host([data-layout="home"]) .boot-skeleton-page,:host([data-layout="auth"]) .boot-skeleton-page{grid-template-columns:1fr;margin-top:0}.boot-skeleton-rail{min-height:210px}.boot-skeleton-rail-card{margin-top:28px}:host([data-layout="home"]) .boot-skeleton-rail-card,:host([data-layout="auth"]) .boot-skeleton-rail-card{margin-top:32px}.boot-skeleton-cards{grid-template-columns:1fr 1fr}.boot-skeleton-cards .skeleton-block:last-child{display:none}}' +
+            '@media (max-width:520px){.boot-skeleton-brand-lines{display:none}.boot-skeleton-page{min-height:520px}.boot-skeleton-rail,.boot-skeleton-content{padding:22px 18px}.boot-skeleton-fields,.boot-skeleton-cards{grid-template-columns:1fr}.boot-skeleton-cards .skeleton-block{height:92px}.boot-skeleton-cards .skeleton-block:nth-child(n+2){display:none}}' +
+            '@media (prefers-reduced-motion:reduce){.skeleton-block::after{animation:none}}' +
+            '</style>' +
+            '<div class="boot-skeleton-shell">' +
+              '<div class="boot-skeleton-topbar">' +
+                '<div class="boot-skeleton-brand">' +
+                  '<span class="skeleton-block skeleton-logo"></span>' +
+                  '<span class="boot-skeleton-brand-lines">' +
+                    '<i class="skeleton-block skeleton-line skeleton-line-md"></i>' +
+                    '<i class="skeleton-block skeleton-line skeleton-line-xs"></i>' +
+                  '</span>' +
+                '</div>' +
+                '<div class="boot-skeleton-nav">' +
+                  '<i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i>' +
+                '</div>' +
+                '<i class="skeleton-block skeleton-action"></i>' +
+              '</div>' +
+              '<div class="boot-skeleton-page">' +
+                '<aside class="boot-skeleton-rail skeleton-panel">' +
+                  '<i class="skeleton-block skeleton-line skeleton-line-xs"></i>' +
+                  '<i class="skeleton-block skeleton-line skeleton-line-lg"></i>' +
+                  '<i class="skeleton-block skeleton-line skeleton-line-md"></i>' +
+                  '<div class="boot-skeleton-rail-card">' +
+                    '<i class="skeleton-block skeleton-line skeleton-line-sm"></i>' +
+                    '<i class="skeleton-block skeleton-field"></i>' +
+                    '<i class="skeleton-block skeleton-field"></i>' +
+                  '</div>' +
+                '</aside>' +
+                '<main class="boot-skeleton-content skeleton-panel">' +
+                  '<div class="boot-skeleton-heading">' +
+                    '<span>' +
+                      '<i class="skeleton-block skeleton-line skeleton-line-xs"></i>' +
+                      '<i class="skeleton-block skeleton-line skeleton-line-lg"></i>' +
+                    '</span>' +
+                    '<i class="skeleton-block skeleton-action"></i>' +
+                  '</div>' +
+                  '<div class="boot-skeleton-cards">' +
+                    '<i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i>' +
+                  '</div>' +
+                  '<div class="boot-skeleton-fields">' +
+                    '<i class="skeleton-block skeleton-field"></i>' +
+                    '<i class="skeleton-block skeleton-field"></i>' +
+                  '</div>' +
+                  '<div class="boot-skeleton-rows">' +
+                    '<i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i>' +
+                  '</div>' +
+                '</main>' +
+              '</div>' +
+            '</div>';
+        } catch (_) {}
+      })();
+      (function () {
+        var skeleton = document.getElementById("bootSkeleton");
+        if (!skeleton) return;
+        var page = "auth";
+        try {
+          var user = JSON.parse(localStorage.getItem("sirius.currentUser") || "null");
+          var savedPage = sessionStorage.getItem("sirius.currentPage");
+          page = user ? (savedPage || "home") : "auth";
+        } catch (_) {}
+        skeleton.dataset.layout = ["statistics", "bookmarks", "leaderboard", "results"].includes(page) ? "list" : page;
+      })();
+    </script>
+
+    <div class="cosmos-backdrop" aria-hidden="true"></div>
+    <canvas class="auth-flow-canvas" id="authFlowCanvas" width="240" height="160" aria-hidden="true"></canvas>
+    <canvas class="auth-flow-canvas auth-sky-canvas" id="authSkyCanvas" width="240" height="160" aria-hidden="true" hidden></canvas>
+    <div class="auth-flow-grain gradient-sumizora" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <!-- Displacement map for true edge refraction on Chromium (html.lg-lens).
+         The map keeps the centre neutral (#808000 = zero displacement) and
+         only bends samples inward near the edges — the liquid-glass lens. -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+      <filter id="lgLens" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feImage x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="lgMap"
+          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><defs><linearGradient id='x' x1='0' y1='0' x2='1' y2='0'><stop offset='0' stop-color='%23000000'/><stop offset='1' stop-color='%23ff0000'/></linearGradient><linearGradient id='y' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23000000'/><stop offset='1' stop-color='%2300ff00'/></linearGradient><radialGradient id='c' cx='0.5' cy='0.5' r='0.5'><stop offset='0' stop-color='%23808000'/><stop offset='0.8' stop-color='%23808000'/><stop offset='1' stop-color='%23808000' stop-opacity='0'/></radialGradient></defs><rect width='240' height='240' fill='url(%23x)'/><rect width='240' height='240' fill='url(%23y)' style='mix-blend-mode:screen'/><rect width='240' height='240' fill='url(%23c)'/></svg>"/>
+        <feDisplacementMap in="SourceGraphic" in2="lgMap" scale="-30" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </svg>
+    <div class="app-shell">
+      <div class="topbar-scroll-shield" id="topbarScrollShield" aria-hidden="true">
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+      </div>
+      <div class="progress-frost" aria-hidden="true">
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+        <div class="pb-layer"></div>
+      </div>
+      <header class="topbar" aria-label="Application header">
+        <a class="brand" href="#" aria-label="SIRIUS home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="scratch-logo.svg" alt="" width="28" height="36" fetchpriority="high">
+          </span>
+          <span>
+            <strong>SIRIUS</strong>
+          </span>
+        </a>
+
+        <nav class="page-nav hidden" id="pageNav" aria-label="Page navigation">
+          <button class="nav-pill active" id="homeNavButton" type="button" aria-label="Home">
+            <i class="ph ph-house" aria-hidden="true"></i>
+            <span>Home</span>
+          </button>
+          <button class="nav-pill" id="dashboardNavButton" type="button" aria-label="Dashboard">
+            <i class="ph ph-squares-four" aria-hidden="true"></i>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-pill" id="statisticsNavButton" type="button" aria-label="Statistics">
+            <i class="ph ph-chart-line-up" aria-hidden="true"></i>
+            <span>Statistics</span>
+          </button>
+          <button class="nav-pill" id="bookmarksNavButton" type="button" aria-label="Bookmarks">
+            <i class="ph ph-bookmark-simple" aria-hidden="true"></i>
+            <span>Bookmarks</span>
+          </button>
+          <button class="nav-pill" id="leaderboardNavButton" type="button" aria-label="Leaderboard">
+            <i class="ph ph-trophy" aria-hidden="true"></i>
+            <span>Leaderboard</span>
+          </button>
+        </nav>
+
+        <nav class="topbar-actions" aria-label="Application actions">
+          <div class="auth-theme-switch" id="authThemeSwitch" role="group" aria-label="Choose theme">
+            <button type="button" class="auth-theme-option" data-theme="light" aria-pressed="false" aria-label="Light theme">
+              <i class="ph ph-sun" aria-hidden="true"></i><span>Light</span>
+            </button>
+            <button type="button" class="auth-theme-option" data-theme="amoled" aria-pressed="true" aria-label="Dark theme">
+              <i class="ph ph-moon-stars" aria-hidden="true"></i><span>Dark</span>
+            </button>
+            <button type="button" class="auth-theme-option" data-theme="ink-sky" aria-pressed="false" aria-label="Ink sky theme">
+              <i class="ph ph-star-four" aria-hidden="true"></i><span>Ink sky</span>
+            </button>
+          </div>
+          <button class="ghost-button profile-action-button hidden" id="profileButton" type="button" aria-label="Profile and settings">
+            <i class="ph ph-users" aria-hidden="true"></i>
+            <span>Profile</span>
+          </button>
+          <button class="icon-button hidden" id="inboxButton" type="button" aria-label="Inbox">
+            <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+            <span class="icon-badge" id="inboxBadge">0</span>
+          </button>
+        </nav>
+      </header>
+
+      <main id="mainContent">
+        <section class="auth-view hidden" id="authView" aria-labelledby="authTitle">
+          <div class="auth-panel">
+            <div class="auth-copy border-glow-card">
+              <h1 id="authTitle">Navigate your path to mastery.</h1>
+              <p>
+                Sign in, choose the exact chapter, then work through concise MCQs with instant correction, saved review queues, and quiet progress tracking.
+              </p>
+            </div>
+
+            <div class="form-card border-glow-card" aria-label="Account access">
+              <div class="auth-owl" id="authOwl" aria-hidden="true">
+                <svg class="owl-svg" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+                  <g class="owl-feet">
+                    <path class="owl-foot" d="M88 146 q1 9 5 9 q3 0 4 -5 q1 5 4 5 q3 0 4 -5 q1 5 4 5 q4 0 5 -9 z"/>
+                    <path class="owl-foot" d="M106 146 q1 9 5 9 q3 0 4 -5 q1 5 4 5 q3 0 4 -5 q1 5 4 5 q4 0 5 -9 z"/>
+                  </g>
+                  <g class="owl-root">
+                    <g class="owl-tufts">
+                      <path class="owl-tuft" d="M74 34 Q66 16 56 12 Q70 12 82 24 Z"/>
+                      <path class="owl-tuft" d="M146 34 Q154 16 164 12 Q150 12 138 24 Z"/>
+                    </g>
+                    <path class="owl-body" d="M110 22 C74 22 52 50 52 92 C52 128 76 148 110 148 C144 148 168 128 168 92 C168 50 146 22 110 22 Z"/>
+                    <path class="owl-belly" d="M110 96 C92 96 80 110 80 126 C80 140 93 148 110 148 C127 148 140 140 140 126 C140 110 128 96 110 96 Z"/>
+                    <g class="owl-belly-feathers">
+                      <path d="M96 112 q6 8 14 8 q8 0 14 -8"/>
+                      <path d="M92 126 q8 9 18 9 q10 0 18 -9"/>
+                    </g>
+                    <g class="owl-head">
+                      <g class="owl-eye owl-eye-left" transform="translate(86 62)">
+                        <circle class="owl-sclera" r="20"/>
+                        <g class="owl-pupil-g">
+                          <circle class="owl-pupil" r="8.5"/>
+                          <circle class="owl-glint" cx="-3" cy="-3.2" r="2.6"/>
+                        </g>
+                        <circle class="owl-lid" r="20.5"/>
+                        <circle class="owl-eyering" r="20"/>
+                      </g>
+                      <g class="owl-eye owl-eye-right" transform="translate(134 62)">
+                        <circle class="owl-sclera" r="20"/>
+                        <g class="owl-pupil-g">
+                          <circle class="owl-pupil" r="8.5"/>
+                          <circle class="owl-glint" cx="-3" cy="-3.2" r="2.6"/>
+                        </g>
+                        <circle class="owl-lid" r="20.5"/>
+                        <circle class="owl-eyering" r="20"/>
+                      </g>
+                      <path class="owl-beak" d="M110 80 L118 87 Q110 100 110 100 Q110 100 102 87 Z"/>
+                    </g>
+                    <g class="owl-arm owl-arm-left" transform="translate(60 84)">
+                      <g class="owl-arm-inner">
+                        <path class="owl-wing" d="M-6 -6 C-16 8 -14 34 -2 48 C4 54 12 50 11 40 C10 26 8 8 4 -6 Z"/>
+                        <g class="owl-fingers">
+                          <ellipse cx="-2" cy="47" rx="4.2" ry="8" transform="rotate(24 -2 47)"/>
+                          <ellipse cx="5" cy="44" rx="4.2" ry="8" transform="rotate(40 5 44)"/>
+                        </g>
+                      </g>
+                    </g>
+                    <g class="owl-arm owl-arm-right" transform="translate(160 84)">
+                      <g class="owl-arm-inner">
+                        <path class="owl-wing" d="M6 -6 C16 8 14 34 2 48 C-4 54 -12 50 -11 40 C-10 26 -8 8 -4 -6 Z"/>
+                        <g class="owl-fingers">
+                          <ellipse cx="2" cy="47" rx="4.2" ry="8" transform="rotate(-24 2 47)"/>
+                          <ellipse cx="-5" cy="44" rx="4.2" ry="8" transform="rotate(-40 -5 44)"/>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <div class="segmented" role="tablist" aria-label="Account mode">
+                <button class="segment active" id="loginTab" type="button" role="tab" aria-selected="true">Login</button>
+                <button class="segment" id="signupTab" type="button" role="tab" aria-selected="false">Create account</button>
+              </div>
+
+              <form id="authForm" novalidate>
+                <label for="nameField" id="nameLabel" class="field collapsed">
+                  <span>Full name</span>
+                  <input id="nameField" name="name" autocomplete="name" placeholder="Your Name">
+                </label>
+
+                <label for="emailField" class="field">
+                  <span>Email</span>
+                  <input id="emailField" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+                </label>
+
+                <label for="passwordField" class="field">
+                  <span>Password</span>
+                  <div class="input-affix">
+                    <input id="passwordField" name="password" type="password" autocomplete="current-password" placeholder="Password" required minlength="1">
+                    <button class="password-toggle" id="passwordToggle" type="button" aria-label="Show password" aria-pressed="false">
+                      <i class="ph ph-eye" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </label>
+
+                <div class="auth-forgot-row" id="forgotPasswordRow">
+                  <button class="text-button" id="forgotPasswordLink" type="button">Forgot password?</button>
+                </div>
+
+                <div class="auth-consent" id="authConsentRow">
+                  <label class="auth-consent-control" for="authConsent">
+                    <input id="authConsent" name="legal-consent" type="checkbox" required>
+                    <span class="auth-consent-box" aria-hidden="true">
+                      <i class="ph ph-check"></i>
+                    </span>
+                    <span class="auth-consent-copy">
+                      I agree to the
+                      <a href="terms.html" target="_blank" rel="noopener">Terms of Use</a>
+                      and
+                      <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                    </span>
+                  </label>
+                </div>
+
+                <div class="hidden" id="forgotPasswordPanel">
+                  <label for="forgotPasswordEmailField" class="field">
+                    <span>Email</span>
+                    <input id="forgotPasswordEmailField" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+                  </label>
+                  <p class="form-status" id="forgotPasswordStatus" aria-live="polite"></p>
+                  <button class="primary-button full-width" id="forgotPasswordSubmit" type="button">
+                    <span>Send reset link</span>
+                  </button>
+                </div>
+
+                <p class="form-error" id="authError" role="alert"></p>
+                <p class="form-status" id="authStatus" aria-live="polite"></p>
+                <button class="primary-button full-width" id="authSubmit" type="submit">
+                  <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                  <span>Login</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section class="auth-view hidden" id="resetPasswordView" aria-labelledby="resetPasswordTitle">
+          <div class="form-card border-glow-card auth-reset-card">
+            <h1 id="resetPasswordTitle">Set a new password</h1>
+            <p class="muted">Choose a new password for your account.</p>
+            <form id="resetPasswordForm" novalidate>
+              <label for="resetPasswordField" class="field">
+                <span>New password</span>
+                <input id="resetPasswordField" type="password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8">
+              </label>
+              <label for="resetPasswordConfirmField" class="field">
+                <span>Confirm password</span>
+                <input id="resetPasswordConfirmField" type="password" autocomplete="new-password" placeholder="Repeat password" required minlength="8">
+              </label>
+              <p class="form-error" id="resetPasswordError" role="alert"></p>
+              <button class="primary-button full-width" id="resetPasswordSubmit" type="submit">
+                <span>Set new password</span>
+              </button>
+            </form>
+            <div class="hidden" id="resetPasswordDone">
+              <p>Your password has been updated. Try logging in again.</p>
+              <a class="primary-button full-width" href="/">Go to login</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="auth-view track-select-view hidden" id="trackSelectView" aria-labelledby="trackSelectTitle">
+          <div class="auth-card">
+            <h2 id="trackSelectTitle">Choose your group</h2>
+            <div class="track-option-list" id="trackOptionList"></div>
+            <p class="form-error hidden" id="trackSelectError"></p>
+          </div>
+        </section>
+
+        <section class="home-view hidden" id="homeView" aria-labelledby="homeTitle">
+          <div class="home-panel">
+            <div class="home-copy border-glow-card">
+              <div class="home-heading-row">
+                <img src="scratch-logo.svg" alt="SIRIUS logo" class="home-logo" width="200" height="260" fetchpriority="high">
+                <h1 id="homeTitle">Navigate your path to mastery.</h1>
+              </div>
+              <p class="muted">
+                Start a clean mixed session, narrow the curriculum, or revisit the questions that still need a second look.
+              </p>
+              <div class="home-summary" id="homeSummaryClassic" aria-label="Platform content summary">
+                <span><strong id="homeTotalAnswers">0</strong> total answers</span>
+                <span><strong id="homeTotalSessions">0</strong> total sessions</span>
+                <span><strong id="homeQuestionCount">Loading...</strong> questions</span>
+                <span><strong id="homeModuleCount">Loading...</strong> modules</span>
+              </div>
+              <div class="home-stats-card" id="homeTotalAnswersSummary" aria-label="100,000 answer milestone reached" hidden>
+                <div class="home-stats-hero">
+                  <span class="home-stats-hero-figure">
+                    <strong id="homeTotalAnswersGold">0</strong>
+                  </span>
+                  <span class="home-stats-hero-label">total answers</span>
+                </div>
+                <div class="home-stats-grid" role="list">
+                  <span role="listitem"><strong id="homeTotalSessionsGold">0</strong><small>sessions</small></span>
+                  <span role="listitem"><strong id="homeQuestionCountGold">Loading...</strong><small>questions</small></span>
+                  <span role="listitem"><strong id="homeModuleCountGold">Loading...</strong><small>modules</small></span>
+                </div>
+              </div>
+              <p class="micro-label quran-verse" dir="rtl" lang="ar">وَتَحْسَبُ أَنَّكَ جِرْمٌ صَغِيرٌ، وَفِيكَ انْطَوَى الْعَالَمُ الْأَكْبَرُ</p>
+            </div>
+            <aside class="avatar-nudge hidden" id="avatarNudge" role="status" aria-live="polite" aria-labelledby="avatarNudgeTitle" aria-describedby="avatarNudgeDescription">
+              <span class="avatar-nudge-preview" aria-hidden="true">
+                <svg class="avatar-nudge-user-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="3.25"></circle><path d="M6.75 19c.75-2.65 2.5-4 5.25-4s4.5 1.35 5.25 4"></path><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path></svg>
+                <span class="avatar-nudge-badge"><i class="ph ph-star-four"></i></span>
+              </span>
+              <div class="avatar-nudge-copy">
+                <span class="avatar-nudge-eyebrow"><i class="ph ph-star-four" aria-hidden="true"></i>Your profile is waiting</span>
+                <strong id="avatarNudgeTitle">Choose your SIRIUS avatar</strong>
+                <small id="avatarNudgeDescription">Stand out on your profile, friends list, and leaderboard. No photo needed.</small>
+              </div>
+              <button class="primary-button" id="avatarNudgeCreate" type="button">
+                <svg class="avatar-nudge-user-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="3.25"></circle><path d="M6.75 19c.75-2.65 2.5-4 5.25-4s4.5 1.35 5.25 4"></path><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path></svg>
+                <span>Choose avatar</span>
+              </button>
+              <button class="icon-button avatar-nudge-dismiss" id="avatarNudgeDismiss" type="button" aria-label="Dismiss avatar suggestion"><i class="ph ph-x" aria-hidden="true"></i></button>
+            </aside>
+            <section class="home-welcome-card border-glow-card" aria-labelledby="homeWelcomeTitle">
+              <span class="home-welcome-avatar" id="homeWelcomeAvatar" aria-hidden="true">S</span>
+              <div class="home-welcome-copy">
+                <p class="home-welcome-greeting" id="homeWelcomeGreeting">Good to see you</p>
+                <h2 id="homeWelcomeTitle"><span id="homeWelcomeName">student</span></h2>
+                <p class="home-welcome-meta" id="homeWelcomeMeta">Your study space is ready when you are.</p>
+                <div class="home-welcome-streak" aria-live="polite">
+                  <span class="home-welcome-streak-icon" aria-hidden="true"><i class="ph ph-fire"></i></span>
+                  <span class="home-welcome-streak-copy">
+                    <strong id="streakDays">Start your streak</strong>
+                    <small id="streakNote">Answer 5 questions to kick things off.</small>
+                  </span>
+                </div>
+                <div class="home-welcome-actions is-single-action" aria-label="Session actions">
+                  <button class="home-action-card primary-card" id="quickStartButton" type="button">
+                    <i class="ph ph-play-circle" aria-hidden="true"></i>
+                    <span>
+                      <strong>Begin session</strong>
+                      <small>Open the dashboard and choose the exam experience that fits today.</small>
+                    </span>
+                  </button>
+                  <button class="home-action-card continue-card hidden" id="continueSessionButton" type="button" disabled>
+                    <i class="ph ph-arrow-circle-right" aria-hidden="true"></i>
+                    <span>
+                      <strong>Continue last session</strong>
+                      <small id="continueSessionNote">No unfinished session yet.</small>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="smart-plan-card border-glow-card" id="smartPlanCard" aria-labelledby="smartPlanTitle" aria-live="polite">
+              <div class="smart-plan-heading">
+                <div>
+                  <h2 id="smartPlanTitle">Your next target</h2>
+                </div>
+              </div>
+              <div id="smartPlanContent" class="smart-plan-content">
+                <p class="smart-plan-empty">Loading your exam plan…</p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="dashboard-view hidden" id="dashboardView" aria-labelledby="practiceTitle">
+          <div class="dashboard-grid">
+            <section class="workspace-panel border-glow-card" aria-labelledby="practiceTitle">
+              <span class="dashboard-avatar hidden" id="dashboardAvatar" aria-hidden="true">S</span>
+              <div class="panel-heading">
+                <div>
+                  <h2 id="practiceTitle">Shape the next set</h2>
+                </div>
+              </div>
+
+              <div class="exam-mode-grid" role="radiogroup" aria-label="Exam type">
+                <button class="exam-mode-card active" id="chapterMode" type="button" role="radio" aria-checked="true">
+                  <i class="ph ph-books" aria-hidden="true"></i>
+                  <span>
+                    <strong>Chapter training</strong>
+                    <small>Choose one or more chapters and practice with instant answers.</small>
+                  </span>
+                </button>
+                <button class="exam-mode-card" id="shuffleMode" type="button" role="radio" aria-checked="false">
+                  <i class="ph ph-shuffle" aria-hidden="true"></i>
+                  <span>
+                    <strong>Shuffle exam</strong>
+                    <small>Choose chapters and answer every question in random order, with no time limit.</small>
+                  </span>
+                </button>
+                <button class="exam-mode-card" id="timedMode" type="button" role="radio" aria-checked="false">
+                  <i class="ph ph-timer" aria-hidden="true"></i>
+                  <span>
+                    <strong>Timed exam</strong>
+                    <small>Choose chapters, set a timer, and pick an exact question count.</small>
+                  </span>
+                </button>
+              </div>
+
+              <form class="filter-grid" id="filterForm">
+                <label class="field" for="moduleSelect">
+                  <span>Module</span>
+                  <select id="moduleSelect" name="module"></select>
+                </label>
+                <label class="field hidden" id="secondModuleField" for="secondModuleSelect">
+                  <span>Second module (optional)</span>
+                  <select id="secondModuleSelect" name="secondModule"></select>
+                </label>
+                <label class="field hidden" id="subjectField" for="subjectSelect">
+                  <span>Subject</span>
+                  <select id="subjectSelect" name="subject"></select>
+                </label>
+                <label class="field hidden" id="timeLimitField" for="timeLimitSelect">
+                  <span>Time limit (minutes)</span>
+                  <input id="timeLimitSelect" name="timeLimit" type="number" inputmode="numeric" min="1" max="240" value="30">
+                </label>
+                <label class="field hidden" id="questionCountField" for="questionCountSelect">
+                  <span>Number of questions</span>
+                  <input id="questionCountSelect" name="questionCount" type="number" inputmode="numeric" min="1" max="500" value="100">
+                </label>
+                <div class="field chapter-field">
+                  <div class="chapter-field-heading">
+                    <span>Chapters</span>
+                    <div class="chapter-selection-actions" aria-label="Chapter selection actions">
+                      <button class="text-button" id="selectAllChaptersButton" type="button">Select all</button>
+                      <button class="text-button" id="clearAllChaptersButton" type="button">Clear all</button>
+                    </div>
+                  </div>
+                  <div class="chapter-checklist" id="chapterChecklist" aria-label="Chapter selection"></div>
+                </div>
+                <div class="field chapter-field">
+                  <div class="chapter-field-heading">
+                    <span>Sources</span>
+                    <div class="chapter-selection-actions" aria-label="Source selection actions">
+                      <button class="text-button" id="selectAllSourcesButton" type="button">Select all</button>
+                      <button class="text-button" id="clearAllSourcesButton" type="button">Clear all</button>
+                    </div>
+                  </div>
+                  <div class="chapter-checklist" id="sourceChecklist" aria-label="Source selection"></div>
+                </div>
+                <label class="ghost-mode-toggle dedupe-field" id="dedupeField" for="dedupeToggle">
+                  <span class="ghost-mode-copy">
+                    <strong>Skip duplicate questions</strong>
+                    <small>Show only one copy of questions tagged as duplicates by the admin</small>
+                  </span>
+                  <input id="dedupeToggle" type="checkbox" role="switch">
+                  <span class="switch-track" aria-hidden="true">
+                    <span class="switch-thumb"></span>
+                  </span>
+                </label>
+              </form>
+
+              <label class="ghost-mode-toggle spectate-field" id="spectateField" for="spectateToggle">
+                <span class="ghost-mode-copy">
+                  <strong>Spectate mode</strong>
+                  <small>Show the questions with their answers (مناسب للبصمجة)</small>
+                </span>
+                <input id="spectateToggle" type="checkbox" role="switch">
+                <span class="switch-track" aria-hidden="true">
+                  <span class="switch-thumb"></span>
+                </span>
+              </label>
+
+              <p class="resume-note hidden" id="resumeNote" aria-live="polite"></p>
+
+              <div class="action-row">
+                <button class="primary-button" id="startQuizButton" type="button">
+                  <i class="ph ph-play" aria-hidden="true"></i>
+                  <span>Start practice</span>
+                </button>
+                <button class="ghost-button export-pdf-button" id="exportPdfButton" type="button">
+                  <i class="ph ph-export" aria-hidden="true"></i>
+                  <span>Export PDF</span>
+                </button>
+                <button class="ghost-button hidden" id="restartQuizButton" type="button" disabled>
+                  <i class="ph ph-repeat" aria-hidden="true"></i>
+                  <span>Restart practice</span>
+                </button>
+                <button class="ghost-button hidden" id="dashboardChallengeButton" type="button">
+                  <i class="ph ph-target" aria-hidden="true"></i>
+                  <span>Challenge a friend</span>
+                </button>
+                <p class="muted" id="matchCount" aria-live="polite"></p>
+              </div>
+
+              <div class="queue-row" aria-label="Review queues">
+                <button class="queue-button" id="wrongQueueButton" type="button">
+                  <i class="ph ph-warning-circle" aria-hidden="true"></i>
+                  <span>Practice wrong answers</span>
+                  <strong id="wrongQueueCount">0</strong>
+                </button>
+                <button class="queue-button" id="bookmarkQueueButton" type="button">
+                  <i class="ph ph-bookmark-simple" aria-hidden="true"></i>
+                  <span>Practice bookmarks</span>
+                  <strong id="bookmarkQueueCount">0</strong>
+                </button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="statistics-view hidden" id="statisticsView" aria-labelledby="statisticsTitle">
+          <div class="standalone-panel border-glow-card">
+            <div class="standalone-heading">
+              <div>
+                <p class="micro-label">Statistics</p>
+                <h2 id="statisticsTitle">Your performance room</h2>
+              </div>
+            </div>
+            <div class="stats-overview-grid" id="statsOverviewGrid"></div>
+            <section class="archive-section hidden" id="archiveSection" aria-labelledby="archiveTitle">
+              <h3 id="archiveTitle">Previous years</h3>
+              <div class="stat-grid" id="archiveYearsGrid"></div>
+            </section>
+            <section class="insight-panel soft-panel" aria-labelledby="statsTopicsTitle">
+              <div class="stats-topic-heading">
+                <div>
+                <p class="micro-label">Topic map</p>
+                <h3 id="statsTopicsTitle">Module, subject and chapter performance</h3>
+                </div>
+                <p class="stats-peer-status" id="statsPeerStatus" role="status" aria-live="polite">Loading class comparison…</p>
+              </div>
+              <div class="topic-analytics-tree" id="statsTopicBreakdown"></div>
+            </section>
+            <section class="insight-panel soft-panel" aria-labelledby="statsHistoryTitle">
+              <div class="stats-history-header">
+                <div>
+                  <p class="micro-label">Recent work</p>
+                  <h3 id="statsHistoryTitle">Session timeline</h3>
+                </div>
+                <button class="ghost-button" id="seeMoreHistoryBtn" type="button" style="display:none">See more</button>
+              </div>
+              <div class="session-history-list" id="statsHistoryList"></div>
+              <p class="history-retention-note" id="historyRetentionNote"></p>
+            </section>
+
+            <dialog class="history-modal" id="historyModal" aria-label="Full session history">
+              <div class="history-modal-inner">
+                <div class="history-modal-header">
+                  <h3>Session history</h3>
+                  <button class="icon-button" id="historyModalClose" type="button" aria-label="Close"><i class="ph ph-x"></i></button>
+                </div>
+                <div class="session-history-list" id="historyModalList"></div>
+                <p class="history-retention-note" id="historyModalNote"></p>
+              </div>
+            </dialog>
+          </div>
+        </section>
+
+        <section class="bookmarks-view hidden" id="bookmarksView" aria-labelledby="bookmarksPageTitle">
+          <div class="standalone-panel bookmarks-panel border-glow-card">
+            <div class="standalone-heading">
+              <div>
+                <h2 id="bookmarksPageTitle">Your bookmark library</h2>
+                <p class="muted">Review your saved questions and see which items are saved most often.</p>
+              </div>
+              <div class="standalone-actions">
+                <button class="primary-button" id="practiceBookmarksButton" type="button">
+                  <i class="ph ph-play" aria-hidden="true"></i>
+                  <span>Practice my bookmarks</span>
+                </button>
+              </div>
+            </div>
+            <div class="bookmark-summary-grid" id="bookmarkSummaryGrid"></div>
+            <div class="bookmark-library-grid">
+              <section class="bookmark-library-section" aria-labelledby="myBookmarksTitle">
+                <div class="section-heading-row">
+                  <div>
+                    <p class="micro-label">Personal library</p>
+                    <h3 id="myBookmarksTitle">My bookmarks</h3>
+                  </div>
+                  <span class="result-pill" id="myBookmarksCount">0 saved</span>
+                </div>
+                <div class="bookmark-question-list" id="myBookmarksList"></div>
+                <button class="ghost-button see-more-bookmarks hidden" id="seeMoreBookmarksBtn" type="button">See more</button>
+              </section>
+              <section class="bookmark-library-section" aria-labelledby="popularBookmarksTitle">
+                <div class="bookmark-library-head">
+                  <div>
+                    <p class="micro-label" id="bookmarkSignalLabel">Community signal</p>
+                    <h3 id="popularBookmarksTitle">Most bookmarked by students</h3>
+                  </div>
+                  <div class="community-filter-row">
+                    <label class="community-filter-field" for="communityModuleSelect">
+                      <span>Module</span>
+                      <select class="filter-select" id="communityModuleSelect"></select>
+                    </label>
+                    <label class="community-filter-field hidden" id="communitySubjectField" for="communitySubjectSelect">
+                      <span>Subject</span>
+                      <select class="filter-select" id="communitySubjectSelect"></select>
+                    </label>
+                  </div>
+                </div>
+                <div class="bookmark-question-list" id="popularBookmarksList"></div>
+                <button class="ghost-button hidden" id="seeMorePopularBtn" type="button">See more</button>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="leaderboard-view hidden" id="leaderboardView" aria-labelledby="leaderboardPageTitle">
+          <div class="standalone-panel border-glow-card">
+            <div class="standalone-heading">
+              <div>
+                <h2 id="leaderboardPageTitle">Anonymous ranking for your year</h2>
+              </div>
+            </div>
+            <div class="student-rank-banner hidden" id="studentRankBanner" aria-live="polite">
+              <span class="student-rank-icon" aria-hidden="true"><i class="ph ph-medal"></i></span>
+              <div class="student-rank-copy">
+                <span>Your position</span>
+                <small id="studentRankNote">Updating your rank…</small>
+              </div>
+              <div class="student-rank-number">
+                <strong id="studentRankValue">—</strong>
+                <small id="studentRankTotal"></small>
+              </div>
+            </div>
+            <div class="leaderboard-summary-grid" id="leaderboardSummary"></div>
+            <section class="leaderboard-stage" aria-labelledby="topStudentsTitle">
+              <span class="podium-meteor podium-meteor--one" aria-hidden="true"></span>
+              <span class="podium-meteor podium-meteor--two" aria-hidden="true"></span>
+              <span class="podium-meteor podium-meteor--three" aria-hidden="true"></span>
+              <div class="section-heading-row leaderboard-stage-heading">
+                <div>
+                  <p class="micro-label">Top students</p>
+                  <h3 id="topStudentsTitle">This year's podium</h3>
+                  <span class="privacy-note"><i class="ph ph-shield-check" aria-hidden="true"></i> Anonymous aliases only</span>
+                </div>
+              </div>
+              <div class="leaderboard-podium" id="leaderboardPodium"></div>
+            </section>
+            <div class="section-heading-row leaderboard-list-heading">
+              <div>
+                <p class="micro-label">Top 20 ranking</p>
+                <h3>Leading students in order</h3>
+              </div>
+            </div>
+            <div class="leaderboard-detail-list" id="leaderboardDetailList"></div>
+          </div>
+        </section>
+
+        <section class="quiz-view hidden" id="quizView" aria-labelledby="quizTitle">
+          <div class="quiz-toolbar">
+            <div>
+              <button class="text-button" id="backToDashboard" type="button">
+                <i class="ph ph-arrow-left" aria-hidden="true"></i>
+                <span>Back to setup</span>
+              </button>
+              <h2 id="quizTitle">Practice session</h2>
+              <p class="muted" id="quizMeta"></p>
+              <div class="quiz-score-row" aria-label="Current session score">
+                <span><i class="ph ph-check-circle" aria-hidden="true"></i><strong id="sessionCorrect">0</strong> correct</span>
+                <span><i class="ph ph-x-circle" aria-hidden="true"></i><strong id="sessionWrong">0</strong> wrong</span>
+                <span><i class="ph ph-percent" aria-hidden="true"></i><strong id="sessionAccuracy">0%</strong> accuracy</span>
+                <span><i class="ph ph-clock" aria-hidden="true"></i><strong id="sessionTimer">0:00</strong> elapsed</span>
+                <span class="timer-pill hidden" id="timerPill" role="timer" aria-live="polite"><i class="ph ph-timer" aria-hidden="true"></i><strong id="timerValue">00:00</strong> left</span>
+              </div>
+              <p class="keyboard-hint muted">
+                <i class="ph ph-keyboard" aria-hidden="true"></i>
+                Press <kbd>1-4</kbd> or <kbd>A-D</kbd> to answer, <kbd>Enter</kbd> for next, <kbd>Shift+B</kbd> to bookmark
+              </p>
+            </div>
+          </div>
+
+          <div class="progress-wrap" aria-label="Quiz progress">
+            <div class="progress-bar"><span id="progressBar"></span></div>
+          </div>
+
+          <div class="question-map" id="questionMap" aria-label="Question navigator" role="navigation"></div>
+
+          <div class="question-list" id="questionList"></div>
+
+          <div class="vertical-controls hidden" id="verticalControls">
+            <button class="ghost-button done-for-now-button" id="verticalDoneForNowButton" type="button">
+              <i class="ph ph-pause-circle" aria-hidden="true"></i>
+              <span>Done for now</span>
+            </button>
+            <button class="primary-button submit-exam-button hidden" id="verticalSubmitExamButton" type="button">
+              <i class="ph ph-check-square" aria-hidden="true"></i>
+              <span>Submit exam</span>
+            </button>
+          </div>
+
+          <div class="horizontal-controls hidden" id="horizontalControls">
+            <button class="ghost-button" id="prevQuestionButton" type="button">
+              <i class="ph ph-caret-left" aria-hidden="true"></i>
+              <span>Previous</span>
+            </button>
+            <span id="horizontalCounter">1 of 1</span>
+            <button class="primary-button" id="nextQuestionButton" type="button">
+              <span>Next</span>
+              <i class="ph ph-caret-right" aria-hidden="true"></i>
+            </button>
+            <div class="session-exit-actions">
+              <button class="ghost-button done-for-now-button" id="doneForNowButton" type="button">
+                <i class="ph ph-pause-circle" aria-hidden="true"></i>
+                <span>Done for now</span>
+              </button>
+              <button class="primary-button submit-exam-button hidden" id="horizontalSubmitExamButton" type="button">
+                <i class="ph ph-check-square" aria-hidden="true"></i>
+                <span>Submit exam</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="results-view hidden" id="resultsView" aria-labelledby="resultsTitle">
+          <div class="results-panel border-glow-card">
+            <p class="micro-label">Session complete</p>
+            <h2 id="resultsTitle">Here is how you did</h2>
+            <div class="results-stat-grid" aria-label="Session results">
+              <div class="stat-card">
+                <span class="stat-bar"><i class="ph ph-check-circle" aria-hidden="true"></i>Correct</span>
+                <strong id="resultCorrect">0</strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-bar"><i class="ph ph-x-circle" aria-hidden="true"></i>Wrong</span>
+                <strong id="resultWrong">0</strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-bar"><i class="ph ph-percent" aria-hidden="true"></i>Accuracy</span>
+                <strong id="resultAccuracy">0%</strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-bar"><i class="ph ph-clock" aria-hidden="true"></i>Time taken</span>
+                <strong id="resultTime">0s</strong>
+              </div>
+            </div>
+            <section class="challenge-result-summary hidden" id="challengeResultSummary" aria-labelledby="challengeResultTitle">
+              <p class="micro-label">Head-to-head result</p>
+              <h3 id="challengeResultTitle">Challenge complete</h3>
+              <div class="challenge-result-players" id="challengeResultPlayers"></div>
+            </section>
+            <div class="results-actions">
+              <button class="primary-button" id="reviewWrongButton" type="button">
+                <i class="ph ph-warning-circle" aria-hidden="true"></i>
+                <span>Practice wrong answers</span>
+              </button>
+              <button class="ghost-button" id="resultsRetryButton" type="button">
+                <i class="ph ph-repeat" aria-hidden="true"></i>
+                <span>Try again</span>
+              </button>
+              <button class="ghost-button" id="resultsToDashboard" type="button">
+                <i class="ph ph-squares-four" aria-hidden="true"></i>
+                <span>Back to dashboard</span>
+              </button>
+            </div>
+          </div>
+          <section class="results-review hidden" id="resultsReview" aria-labelledby="resultsReviewTitle">
+            <div class="results-review-heading">
+              <div>
+                <p class="micro-label">Session review</p>
+                <h2 id="resultsReviewTitle">Review every question</h2>
+              </div>
+              <span class="result-pill" id="resultsReviewCount">0 questions</span>
+            </div>
+            <div class="results-review-list" id="resultsReviewList"></div>
+          </section>
+        </section>
+
+        <section class="settings-view hidden" id="settingsView" aria-labelledby="settingsTitle">
+          <div class="standalone-panel border-glow-card">
+            <div class="standalone-heading">
+              <div>
+                <p class="micro-label">Profile</p>
+                <h2 id="settingsTitle">Your space, your rules</h2>
+              </div>
+              <div class="standalone-actions">
+                <button class="ghost-button" id="settingsBackButton" type="button">
+                  <i class="ph ph-arrow-left" aria-hidden="true"></i>
+                  <span>Back to dashboard</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="settings-identity soft-panel">
+              <span class="settings-avatar" id="settingsAvatar" aria-hidden="true">S</span>
+              <div class="settings-identity-copy">
+                <strong id="settingsName">Student</strong>
+                <span class="settings-email" id="settingsEmail">student@example.com</span>
+                <span class="alias-note">Leaderboard alias: <strong id="settingsAlias">Private Scholar</strong></span>
+              </div>
+            </div>
+
+            <section class="settings-section soft-panel avatar-settings-card" aria-labelledby="settingsAvatarTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Avatar</p>
+                <h3 id="settingsAvatarTitle">Your private character</h3>
+              </div>
+              <div class="avatar-settings-content">
+                <span class="avatar-settings-preview" id="avatarSettingsPreview" aria-hidden="true">S</span>
+                <div>
+                  <strong>Choose your look</strong>
+                  <small>Shown on your profile, friends list, and leaderboard. Your photo is never required.</small>
+                </div>
+                <button class="primary-button" id="createAvatarButton" type="button">
+                  <span class="avatar-button-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M14.5 4.5 19.5 9.5"></path>
+                      <path d="m13.2 5.8 5 5"></path>
+                      <path d="M4.8 19.2c1.7 1.7 4.5 1.7 6.2 0l7.2-7.2a1.7 1.7 0 0 0 0-2.4l-3.8-3.8a1.7 1.7 0 0 0-2.4 0L4.8 13c-1.7 1.7-1.7 4.5 0 6.2Z"></path>
+                      <path d="M3.5 20.5c2.2.3 4.1-.3 5.5-1.7"></path>
+                    </svg>
+                  </span>
+                  <span class="avatar-button-label">Create avatar</span>
+                </button>
+              </div>
+            </section>
+
+            <section class="settings-section soft-panel" aria-labelledby="settingsAccountTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Account</p>
+                <h3 id="settingsAccountTitle">Account controls</h3>
+              </div>
+              <label class="field settings-year-field" for="studentYearSelect">
+                <span>Your year</span>
+                <select id="studentYearSelect" name="studentYear" required aria-describedby="studentYearStatus"></select>
+                <small id="studentYearStatus" aria-live="polite">Changing your year reloads the matching question bank.</small>
+              </label>
+              <label class="field settings-year-field" id="studentTrackField" for="studentTrackSelect">
+                <span>Your rotation</span>
+                <select id="studentTrackSelect" name="studentTrack" aria-describedby="studentTrackStatus" disabled>
+                  <option value="">Loading rotations…</option>
+                </select>
+                <small id="studentTrackStatus" aria-live="polite">Your rotation controls which modules are currently open.</small>
+              </label>
+              <label class="ghost-mode-toggle" for="ghostModeToggle">
+                <span class="settings-toggle-icon" aria-hidden="true">
+                  <i class="ph ph-eye-slash"></i>
+                </span>
+                <span class="ghost-mode-copy">
+                  <strong>Ghost mode</strong>
+                  <small>Hide me from the leaderboard.</small>
+                </span>
+                <input id="ghostModeToggle" type="checkbox" role="switch">
+                <span class="switch-track" aria-hidden="true">
+                  <span class="switch-thumb"></span>
+                </span>
+              </label>
+              <button class="ghost-button account-reset-button" id="resetPasswordButton" type="button">
+                <i class="ph ph-key" aria-hidden="true"></i>
+                <span>Forgot my password</span>
+              </button>
+              <button class="ghost-button danger-button hidden" id="signOutButton" type="button" aria-label="Sign out">
+                <i class="ph ph-sign-out" aria-hidden="true"></i>
+                <span>Sign out</span>
+              </button>
+            </section>
+
+            <section class="settings-section soft-panel" aria-labelledby="settingsAppearanceTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Appearance</p>
+                <h3 id="settingsAppearanceTitle">Theme &amp; readability</h3>
+              </div>
+
+              <div class="settings-field">
+                <div class="settings-field-label">
+                  <strong>Theme</strong>
+                  <small>Applies instantly and saves to your profile.</small>
+                </div>
+                <div class="theme-picker" id="themePicker" role="radiogroup" aria-label="Theme"></div>
+              </div>
+
+              <div class="settings-field">
+                <div class="settings-field-label">
+                  <strong>Font size</strong>
+                  <small>Scales all text across the whole site.</small>
+                </div>
+                <div class="stepper">
+                  <button class="stepper-button" type="button" id="fontScaleDown" aria-label="Smaller text"><i class="ph ph-minus" aria-hidden="true"></i></button>
+                  <input class="stepper-range" type="range" id="fontScaleRange" min="0.85" max="1.35" step="0.05" value="1" aria-label="Font size">
+                  <button class="stepper-button" type="button" id="fontScaleUp" aria-label="Larger text"><i class="ph ph-plus" aria-hidden="true"></i></button>
+                  <span class="stepper-value" id="fontScaleValue">100%</span>
+                </div>
+              </div>
+
+              <div class="settings-field">
+                <div class="settings-field-label">
+                  <strong>Brightness</strong>
+                  <small>Dim or lift the whole screen for comfortable reading.</small>
+                </div>
+                <div class="stepper">
+                  <button class="stepper-button brightness-sun-button" type="button" id="brightnessDown" aria-label="Dimmer"><i class="ph ph-sun brightness-icon-small" aria-hidden="true"></i></button>
+                  <input class="stepper-range" type="range" id="brightnessRange" min="0.7" max="1.15" step="0.05" value="1" aria-label="Brightness">
+                  <button class="stepper-button brightness-sun-button" type="button" id="brightnessUp" aria-label="Brighter"><i class="ph ph-sun brightness-icon-large" aria-hidden="true"></i></button>
+                  <span class="stepper-value" id="brightnessValue">100%</span>
+                </div>
+              </div>
+
+              <button class="text-button settings-reset" type="button" id="settingsResetAppearance">
+                <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
+                <span>Reset appearance</span>
+              </button>
+            </section>
+
+            <section class="settings-section soft-panel" aria-labelledby="settingsStudyTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Studying</p>
+                <h3 id="settingsStudyTitle">How questions behave</h3>
+              </div>
+              <label class="ghost-mode-toggle" for="tapToRevealToggle">
+                <span class="ghost-mode-copy">
+                  <strong>Tap to show the explanation</strong>
+                  <small>After you answer, keep the explanation hidden until you tap to reveal it.</small>
+                </span>
+                <input id="tapToRevealToggle" type="checkbox" role="switch">
+                <span class="switch-track" aria-hidden="true">
+                  <span class="switch-thumb"></span>
+                </span>
+              </label>
+              <div class="ghost-mode-toggle settings-display-mode-card" aria-labelledby="questionViewTitle">
+                <span class="ghost-mode-copy">
+                  <strong id="questionViewTitle">Question view</strong>
+                  <small>Vertical keeps everything in one scrolling list. Horizontal shows one question at a time.</small>
+                </span>
+                <div class="segmented compact settings-display-mode-toggle" role="tablist" aria-label="Question display mode">
+                  <button class="segment active" id="verticalViewButton" type="button" role="tab" aria-selected="true">Vertical</button>
+                  <button class="segment" id="horizontalViewButton" type="button" role="tab" aria-selected="false">Horizontal</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="settings-section soft-panel" aria-labelledby="settingsOfflineTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Offline</p>
+                <h3 id="settingsOfflineTitle">Offline Question Download</h3>
+              </div>
+              <label class="field offline-module-field" for="offlineImagesModuleSelect">
+                <span>Module</span>
+                <select id="offlineImagesModuleSelect" aria-describedby="offlineImagesStatus">
+                  <option value="">Choose a module</option>
+                </select>
+              </label>
+              <div class="offline-images-control">
+                <span class="offline-images-icon" aria-hidden="true"><i class="ph ph-image"></i></span>
+                <div class="offline-images-copy">
+                  <strong>Selected module package</strong>
+                  <small id="offlineImagesStatus" role="status" aria-live="polite">Choose a module to prepare it for offline study.</small>
+                </div>
+                <div class="offline-images-actions">
+                  <button class="primary-button" id="downloadOfflineImagesButton" type="button">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    <span>Download module</span>
+                  </button>
+                  <button class="ghost-button hidden" id="removeOfflineImagesButton" type="button">
+                    <i class="ph ph-trash" aria-hidden="true"></i>
+                    <span>Remove images</span>
+                  </button>
+                </div>
+              </div>
+              <div class="offline-images-progress hidden" id="offlineImagesProgress">
+                <progress id="offlineImagesProgressBar" max="1" value="0" aria-label="Offline module download progress"></progress>
+                <span id="offlineImagesProgressText">0 / 0</span>
+              </div>
+            </section>
+
+            <section class="settings-section soft-panel" aria-labelledby="settingsFriendsTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Friends</p>
+                <h3 id="settingsFriendsTitle">Study partners <span class="count-chip" id="friendsCount">0</span></h3>
+              </div>
+
+              <div class="settings-field">
+                <div class="settings-field-label">
+                  <strong>Your invite link</strong>
+                  <small>Share it — whoever opens it can add you as a friend. No searching, link only.</small>
+                </div>
+                <div class="invite-row">
+                  <input class="invite-input" id="inviteLinkInput" type="text" readonly aria-label="Your invite link" value="">
+                  <button class="icon-button" id="copyInviteButton" type="button" aria-label="Copy invite link"><i class="ph ph-copy" aria-hidden="true"></i></button>
+                  <button class="primary-button" id="shareInviteButton" type="button"><i class="ph ph-export" aria-hidden="true"></i><span>Share</span></button>
+                </div>
+              </div>
+
+              <div class="friends-list" id="friendsList">
+                <p class="social-empty">No friends yet — share your invite link to add study partners.</p>
+              </div>
+            </section>
+
+            <section class="settings-section soft-panel hidden" id="challengesSection" aria-labelledby="settingsChallengesTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Challenges</p>
+                <h3 id="settingsChallengesTitle">Head to head <span class="count-chip" id="challengesCount">0</span></h3>
+              </div>
+              <div class="challenges-list" id="challengesList"></div>
+            </section>
+
+            <section class="settings-section soft-panel settings-legal-section" aria-labelledby="settingsLegalTitle">
+              <div class="settings-section-head">
+                <p class="micro-label">Legal</p>
+                <h3 id="settingsLegalTitle">Terms &amp; privacy</h3>
+              </div>
+              <nav class="settings-legal-links" aria-label="Legal documents">
+                <a class="settings-legal-link" href="terms.html" target="_blank" rel="noopener">
+                  <span class="settings-legal-icon" aria-hidden="true"><i class="ph ph-clipboard-text"></i></span>
+                  <span class="settings-legal-copy">
+                    <strong>Terms of Use</strong>
+                    <small>Rules for using SIRIUS</small>
+                  </span>
+                  <i class="ph ph-arrow-square-out settings-legal-arrow" aria-hidden="true"></i>
+                </a>
+                <a class="settings-legal-link" href="privacy.html" target="_blank" rel="noopener">
+                  <span class="settings-legal-icon" aria-hidden="true"><i class="ph ph-shield-check"></i></span>
+                  <span class="settings-legal-copy">
+                    <strong>Privacy Policy</strong>
+                    <small>How your data is handled</small>
+                  </span>
+                  <i class="ph ph-arrow-square-out settings-legal-arrow" aria-hidden="true"></i>
+                </a>
+              </nav>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer" aria-label="Site footer">
+        <div class="app-footer-content">
+          <span class="app-footer-credit">by <button class="abolmagd-link" id="openFeedbackBtn" type="button">Abolmagd</button></span>
+          <nav class="app-footer-nav" aria-label="Legal and help links">
+            <a href="terms.html" target="_blank" rel="noopener">Terms of Use</a>
+            <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+            <a class="app-footer-faq" href="faq.html" target="_blank" rel="noopener">FAQs</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <template id="questionTemplate">
+      <article class="question-card border-glow-card">
+        <div class="question-topline">
+          <span class="chapter-tag"></span>
+        </div>
+        <span class="source-tag hidden"></span>
+        <figure class="question-stimulus" style="display:none">
+          <img alt="" loading="lazy">
+          <figcaption class="question-stimulus-caption" style="display:none"></figcaption>
+        </figure>
+        <div class="question-heading">
+          <span class="question-index-tag"></span>
+          <h3 class="question-text"></h3>
+        </div>
+        <div class="option-list"></div>
+        <div class="question-tools">
+          <button class="ghost-button eliminate-two-button hidden" type="button" aria-label="Remove 2 choices">
+            <span>Remove 2 choices</span>
+          </button>
+        </div>
+        <div class="question-footer">
+          <button class="bookmark-button" type="button">
+            <i class="ph ph-bookmark-simple" aria-hidden="true"></i>
+            <span>Bookmark</span>
+          </button>
+          <button class="report-button" type="button">
+            <i class="ph ph-flag" aria-hidden="true"></i>
+            <span>Report</span>
+          </button>
+          <span class="result-pill hidden"></span>
+        </div>
+        <button class="explanation-gate hidden" type="button">
+          <i class="ph ph-eye" aria-hidden="true"></i>
+          <span>Tap to show the explanation</span>
+        </button>
+        <div class="explanation hidden">
+          <div class="explanation-content">
+            <div class="explanation-heading">
+              <strong class="explanation-title">Explanation</strong>
+              <div class="explanation-actions">
+                <button class="text-button ai-explanation-button" type="button">
+                  <i class="ph ph-sparkle" aria-hidden="true"></i>
+                  <span>Ask Sirius AI</span>
+                </button>
+                <button class="text-button edit-explanation-button" type="button">
+                  <i class="ph ph-pencil-simple" aria-hidden="true"></i>
+                  <span>Edit explanation</span>
+                </button>
+              </div>
+            </div>
+            <p class="explanation-text manual-explanation-text" dir="auto"></p>
+            <p class="ai-explanation-status hidden" role="status" aria-live="polite"></p>
+            <div class="ai-explanation-details hidden" dir="rtl"></div>
+          </div>
+          <img alt="" loading="lazy" width="520" height="390" style="display:none">
+        </div>
+      </article>
+    </template>
+
+    <dialog class="app-dialog" id="queueSubjectDialog" aria-labelledby="queueSubjectDialogTitle">
+      <form method="dialog" class="dialog-panel" id="queueSubjectForm">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label" id="queueSubjectLabel">Review queue</p>
+            <h2 id="queueSubjectDialogTitle">Choose how to review</h2>
+          </div>
+          <button class="icon-button dialog-close" type="button" id="queueSubjectDialogClose" aria-label="Close subject selection">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <p class="muted" id="queueSubjectDescription"></p>
+        <div class="field">
+          <span>Mode</span>
+          <div class="queue-mode-options" role="radiogroup" aria-label="Review mode">
+            <label class="queue-mode-option">
+              <input type="radio" name="queueMode" id="queueModeExplore" value="explore" checked>
+              <span>Explore</span>
+            </label>
+            <label class="queue-mode-option">
+              <input type="radio" name="queueMode" id="queueModePractice" value="practice">
+              <span>Practice</span>
+            </label>
+          </div>
+        </div>
+        <label class="field" for="queueSubjectSelect">
+          <span>Module</span>
+          <select id="queueSubjectSelect" name="queueSubject"></select>
+        </label>
+        <p class="queue-subject-count" id="queueSubjectCount" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="queueSubjectCancelButton">Cancel</button>
+          <button class="primary-button" type="submit" id="queueSubjectSubmitButton">
+            <i class="ph ph-play" aria-hidden="true"></i>
+            <span>Continue</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="app-dialog" id="explanationEditDialog" aria-labelledby="explanationEditDialogTitle">
+      <form method="dialog" class="dialog-panel" id="explanationEditForm">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Community explanation</p>
+            <h2 id="explanationEditDialogTitle">Edit explanation</h2>
+          </div>
+          <button class="icon-button dialog-close" type="button" id="explanationEditDialogClose" aria-label="Close explanation editor">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <p class="muted" id="explanationQuestionPreview"></p>
+        <label class="field" for="explanationEditField">
+          <span>Explanation text</span>
+          <textarea id="explanationEditField" rows="8" maxlength="5000" dir="auto" required></textarea>
+        </label>
+        <p class="explanation-edit-note">
+          Your suggestion is sent to the admin for review and will only appear once approved. Please keep medical facts accurate and clear.
+        </p>
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="explanationEditCancelButton">Cancel</button>
+          <button class="primary-button" id="explanationEditSaveButton" type="submit">
+            <i class="ph ph-floppy-disk" aria-hidden="true"></i>
+            <span>Save explanation</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="app-dialog" id="questionDetailDialog" aria-labelledby="questionDetailDialogTitle">
+      <div class="dialog-panel" id="questionDetailPanel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label" id="questionDetailMeta"></p>
+            <h2 id="questionDetailDialogTitle">Question</h2>
+          </div>
+          <button class="icon-button dialog-close" type="button" id="questionDetailDialogClose" aria-label="Close question detail">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <p class="question-detail-text" id="questionDetailText" dir="auto"></p>
+        <div class="question-detail-images hidden" id="questionDetailQuestionImages" aria-label="Images linked to this question"></div>
+        <div class="review-option-list" id="questionDetailOptions"></div>
+        <div class="review-explanation">
+          <div class="explanation-heading"><strong>Explanation</strong></div>
+          <p class="review-explanation-text" id="questionDetailExplanation" dir="auto"></p>
+          <img class="question-detail-explanation-image hidden" id="questionDetailExplanationImage" alt="">
+        </div>
+        <div class="dialog-actions">
+          <button class="primary-button" type="button" id="questionDetailCloseButton">Close</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="addFriendDialog" aria-labelledby="addFriendTitle">
+      <div class="dialog-panel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Invite link</p>
+            <h2 id="addFriendTitle">Add a study partner</h2>
+          </div>
+        </div>
+        <p class="muted">Add <strong id="addFriendName">this student</strong> to your friends?</p>
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="addFriendCancel">Not now</button>
+          <button class="primary-button" type="button" id="addFriendConfirm"><i class="ph ph-user-plus" aria-hidden="true"></i><span>Add friend</span></button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="challengeDialog" aria-labelledby="challengeDialogTitle">
+      <div class="dialog-panel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">New challenge</p>
+            <h2 class="challenge-dialog-title" id="challengeDialogTitle">
+              <span class="challenge-title-word">Challenge</span>
+              <span class="challenge-opponent-name" id="challengeOpponentName">a friend</span>
+            </h2>
+          </div>
+        </div>
+        <label class="field challenge-opponent-field" id="challengeOpponentField" for="challengeOpponentSelect">
+          <span>Friend</span>
+          <select id="challengeOpponentSelect" name="opponent"></select>
+        </label>
+        <p class="challenge-set-summary" id="challengeSetSummary" aria-live="polite"></p>
+        <button class="ghost-button challenge-dashboard-link" type="button" id="challengeDashboardButton">
+          <i class="ph ph-squares-four" aria-hidden="true"></i>
+          <span>Change set in dashboard</span>
+        </button>
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="challengeCancelButton">Cancel</button>
+          <button class="primary-button" type="button" id="challengeCreateButton"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i><span>Send live challenge</span></button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="reportDialog" aria-labelledby="reportDialogTitle">
+      <form method="dialog" class="dialog-panel" id="reportForm">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Question report</p>
+            <h2 id="reportDialogTitle">Send to admin review</h2>
+          </div>
+          <button class="icon-button dialog-close" type="button" id="reportDialogClose" aria-label="Close report dialog">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <p class="muted" id="reportQuestionPreview"></p>
+        <label class="field" for="reportReasonField">
+          <span>What needs review?</span>
+          <textarea id="reportReasonField" rows="4" maxlength="500" placeholder="Describe the issue or leave the default note."></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="reportCancelButton">Cancel</button>
+          <button class="primary-button" type="submit">
+            <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+            <span>Send report</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="app-dialog" id="inboxDialog" aria-labelledby="inboxDialogTitle">
+      <div class="dialog-panel" id="inboxDialogPanel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Inbox</p>
+            <h2 id="inboxDialogTitle">Messages from the admin</h2>
+          </div>
+          <button class="icon-button dialog-close" type="button" id="inboxDialogClose" aria-label="Close inbox">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div id="inboxList"></div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="shortcutDialog" aria-labelledby="shortcutDialogTitle">
+      <div class="dialog-panel shortcut-panel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Keyboard guide</p>
+            <h2 id="shortcutDialogTitle">Move faster through a session</h2>
+          </div>
+          <button class="icon-button dialog-close" type="button" id="shortcutDialogClose" aria-label="Close shortcuts">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="shortcut-list">
+          <span><kbd>1-4</kbd><kbd>A-D</kbd><strong>Choose an answer</strong></span>
+          <span><kbd>Enter</kbd><strong>Next question</strong></span>
+          <span><kbd>Left</kbd><kbd>Right</kbd><strong>Navigate in horizontal mode</strong></span>
+          <span><kbd>Shift+B</kbd><strong>Toggle bookmark</strong></span>
+          <span><kbd>?</kbd><strong>Open this guide</strong></span>
+          <span><kbd>Esc</kbd><strong>Close dialogs</strong></span>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="installInstructionsDialog" aria-labelledby="installInstructionsTitle">
+      <div class="dialog-panel install-instructions-panel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Install SIRIUS</p>
+            <h2 id="installInstructionsTitle">Add it to your home screen</h2>
+          </div>
+          <button class="icon-button dialog-close" type="button" id="installInstructionsClose" aria-label="Close">
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </button>
+        </div>
+        <p class="muted">Follow these 3 taps:</p>
+        <ol class="install-steps">
+          <li>
+            <span class="install-step-icon"><i class="ph ph-export" aria-hidden="true"></i></span>
+            <span>Tap the <strong>Share</strong> icon in Safari's toolbar</span>
+          </li>
+          <li>
+            <span class="install-step-icon"><i class="ph ph-plus-circle" aria-hidden="true"></i></span>
+            <span>Scroll down and tap <strong>Add to Home Screen</strong></span>
+          </li>
+          <li>
+            <span class="install-step-icon"><i class="ph ph-check" aria-hidden="true"></i></span>
+            <span>Tap <strong>Add</strong> in the top corner<small>This activates the web app — SIRIUS opens full-screen, with no browser bar.</small></span>
+          </li>
+        </ol>
+      </div>
+    </dialog>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+
+    <!-- Live challenge notifications (incoming invites + "opponent accepted" cards) -->
+    <div class="challenge-notifs" id="challengeNotifs" aria-live="polite" aria-atomic="false"></div>
+
+    <div class="challenge-countdown hidden" id="challengeCountdown" role="status" aria-live="assertive" aria-atomic="true">
+      <div class="challenge-countdown-panel">
+        <span class="challenge-countdown-icon" aria-hidden="true"><i class="ph ph-target"></i></span>
+        <p class="micro-label">Live challenge</p>
+        <h2 id="challengeCountdownTitle">Challenge accepted</h2>
+        <strong id="challengeCountdownValue">3</strong>
+        <p id="challengeCountdownStatus">Loading questions and images...</p>
+      </div>
+    </div>
+
+    <dialog class="app-dialog" id="signOutDialog" aria-labelledby="signOutDialogTitle">
+      <div class="dialog-panel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Account</p>
+            <h2 id="signOutDialogTitle">Sign out?</h2>
+          </div>
+        </div>
+        <p class="muted">Your progress is saved. You can sign back in anytime.</p>
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="signOutCancelBtn">Cancel</button>
+          <button class="primary-button" type="button" id="signOutConfirmBtn">
+            <i class="ph ph-sign-out" aria-hidden="true"></i>
+            <span>Sign out</span>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="restartDialog" aria-labelledby="restartDialogTitle">
+      <div class="dialog-panel">
+        <div class="dialog-heading">
+          <div>
+            <p class="micro-label">Quiz</p>
+            <h2 id="restartDialogTitle">Restart quiz?</h2>
+          </div>
+        </div>
+        <p class="muted">Your current answers will be cleared and the session will start fresh.</p>
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="restartCancelBtn">Cancel</button>
+          <button class="primary-button" type="button" id="restartConfirmBtn">
+            <i class="ph ph-repeat" aria-hidden="true"></i>
+            <span>Restart</span>
+          </button>
+        </div>
+      </div>
+    </dialog>
+    <dialog class="app-dialog avatar-dialog" id="avatarDialog" aria-labelledby="avatarDialogTitle">
+      <div class="dialog-panel avatar-dialog-panel">
+        <div class="dialog-heading avatar-dialog-heading">
+          <div>
+            <p class="micro-label">Create avatar</p>
+            <h2 id="avatarDialogTitle">Pick your SIRIUS character</h2>
+            <p class="muted">Choose one of the private, locally stored cartoon templates.</p>
+          </div>
+          <button class="icon-button" id="avatarDialogClose" type="button" aria-label="Close avatar picker"><i class="ph ph-x" aria-hidden="true"></i></button>
+        </div>
+        <div class="avatar-picker-layout">
+          <div class="avatar-picker-preview-wrap">
+            <span class="avatar-picker-preview" id="avatarPickerPreview" aria-hidden="true"><i class="ph ph-user"></i></span>
+            <strong id="avatarPickerStatus">Choose a template</strong>
+          </div>
+          <div class="avatar-picker-main">
+            <div class="segmented avatar-gender-tabs" role="tablist" aria-label="Avatar templates">
+              <button class="segment active" id="avatarStarTab" type="button" role="tab" aria-selected="true" aria-label="SIRIUS - the brightest star in the night sky" title="SIRIUS - the brightest star in the night sky"><i class="ph ph-star-four" aria-hidden="true"></i></button>
+              <button class="segment" id="avatarMaleTab" type="button" role="tab" aria-selected="false" aria-label="Male avatars" title="Male avatars"><svg class="avatar-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="14" r="5.25"></circle><path d="M14 10l6-6"></path><path d="M15.75 4H20v4.25"></path></svg></button>
+              <button class="segment" id="avatarFemaleTab" type="button" role="tab" aria-selected="false" aria-label="Female avatars" title="Female avatars"><svg class="avatar-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5.25"></circle><path d="M12 13.25V21"></path><path d="M8.25 17h7.5"></path></svg></button>
+            </div>
+            <div class="avatar-grid" id="avatarGrid" role="radiogroup" aria-label="Avatar choices"></div>
+          </div>
+        </div>
+        <div class="avatar-dialog-footer">
+          <p class="avatar-dialog-error hidden" id="avatarDialogError" role="alert"></p>
+          <div class="dialog-actions">
+            <button class="ghost-button" id="avatarDialogCancel" type="button">Cancel</button>
+            <button class="primary-button" id="avatarDialogSave" type="button" disabled>
+              <i class="ph ph-check" aria-hidden="true"></i>
+              <span>Save avatar</span>
+            </button>
+          </div>
+          <p class="avatar-credit">Artwork mix: New + Classic DiceBear styles, stored locally.</p>
+        </div>
+      </div>
+    </dialog>
+    <script>
+      if ("serviceWorker" in navigator && location.protocol !== "file:") {
+        const hadServiceWorkerController = Boolean(navigator.serviceWorker.controller);
+        // sw.js is already served with Cache-Control: no-cache (.htaccess),
+        // but Safari's own update-check heuristic can go a long time without
+        // noticing a new sw.js exists, leaving students on an old cached
+        // build. Force a check ourselves instead of only relying on it.
+        navigator.serviceWorker.register("sw.js?v=428", { updateViaCache: "none" }).then((registration) => {
+          registration.update().catch(() => {});
+          document.addEventListener("visibilitychange", () => {
+            if (!document.hidden) registration.update().catch(() => {});
+          });
+          window.setInterval(() => registration.update().catch(() => {}), 60 * 60 * 1000);
+          navigator.serviceWorker.ready.then((readyRegistration) => {
+            const warmSecondaryAssets = () => readyRegistration.active?.postMessage({ type: "warm-secondary" });
+            if (typeof window.requestIdleCallback === "function") {
+              window.requestIdleCallback(warmSecondaryAssets, { timeout: 8000 });
+            } else {
+              window.setTimeout(warmSecondaryAssets, 5000);
+            }
+          }).catch(() => {});
+        }).catch(() => {});
+
+        // Once a new worker takes over (skipWaiting + clients.claim in
+        // sw.js), this tab is still running JS/CSS loaded under the old one
+        // until it reloads. Reload once so "the new version" actually means
+        // the new version, not just "next time you fully quit and reopen".
+        let reloadedForNewWorker = false;
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          // A first-time visitor already loaded the newest network assets.
+          // Reload only when an older worker controlled this tab and was
+          // replaced; otherwise every new visitor pays for two full boots.
+          if (!hadServiceWorkerController || reloadedForNewWorker) return;
+          reloadedForNewWorker = true;
+          window.location.reload();
+        });
+      }
+    </script>
+
+    <!-- Opinion survey modal (auto-shown per settings from the admin panel) -->
+    <dialog id="surveyModal" aria-labelledby="surveyTitle">
+      <div class="sv-hero">
+        <span class="sv-hero-icon" aria-hidden="true"><i class="ph ph-clipboard-text"></i></span>
+        <button class="sv-close" id="surveyCloseBtn" type="button" aria-label="Close">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="fb-body sv-body">
+        <h2 id="surveyTitle" class="sv-title"></h2>
+        <div id="surveyBody" class="sv-copy"></div>
+        <div class="fb-group">
+          <textarea class="fb-textarea" id="surveyTextarea" placeholder="اكتب رأيك هنا…" dir="auto" aria-label="رأيك أو اقتراحك عن تجربة استخدام SIRIUS"></textarea>
+        </div>
+        <p class="fb-error hidden" id="surveyError" role="alert"></p>
+      </div>
+      <div class="sv-footer">
+        <button class="sv-submit" type="button" id="surveySubmitBtn">إرسال الرأي</button>
+        <button class="sv-skip" type="button" id="surveySkipBtn">تخطي دلوقتي</button>
+      </div>
+    </dialog>
+
+    <!-- Feedback modal -->
+    <dialog id="feedbackModal" aria-labelledby="fbTitle">
+      <div class="fb-header">
+        <div class="fb-header-left">
+          <span class="fb-icon" aria-hidden="true"><i class="ph ph-chat-dots"></i></span>
+          <h2 id="fbTitle">Send Feedback</h2>
+        </div>
+        <button class="fb-close" id="closeFeedbackModal" type="button" aria-label="Close">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="fb-body">
+        <p class="fb-sub">رسالتك بتوصل للأدمن مباشرة — شكوى، اقتراح، أو أي ملاحظة.</p>
+        <form id="feedbackForm" novalidate>
+          <div class="fb-group">
+            <label for="fbSubject">الموضوع <small style="font-weight:400;text-transform:none;letter-spacing:0">(اختياري)</small></label>
+            <input class="fb-input" id="fbSubject" type="text" placeholder="موضوع الرسالة…" dir="auto">
+          </div>
+          <div class="fb-group">
+            <label for="fbMessage">الرسالة</label>
+            <textarea class="fb-textarea" id="fbMessage" placeholder="اكتب هنا…" dir="auto" required></textarea>
+          </div>
+          <div class="fb-group">
+            <label class="fb-screenshot-option" for="fbIncludeScreenshot">
+              <input id="fbIncludeScreenshot" type="checkbox">
+              <span class="fb-screenshot-copy">
+                <strong>إرفاق لقطة شاشة للمشكلة</strong>
+                <small>المتصفح هيطلب منك تختار تبويب SIRIUS. اللقطة خاصة ومش بيشوفها غير الأدمن.</small>
+              </span>
+            </label>
+            <div id="fbScreenshotFallback" class="hidden" style="margin-top:8px">
+              <label for="fbScreenshotFile">اختار لقطة الشاشة من الصور</label>
+              <input class="fb-input" id="fbScreenshotFile" type="file" accept="image/jpeg,image/png,image/webp">
+            </div>
+          </div>
+          <input id="fbWebsite" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+          <p class="fb-error hidden" id="fbError" role="alert"></p>
+        </form>
+      </div>
+      <div class="fb-footer">
+        <button class="fb-btn-cancel" type="button" id="cancelFeedbackBtn">إلغاء</button>
+        <button class="fb-btn-submit" type="button" id="submitFeedbackBtn">إرسال</button>
+      </div>
+    </dialog>
+
+    <!-- Student-source snapshot: feedback submission runtime omitted. -->
+
+    <!-- Screen-brightness veil: a passive, pointer-events:none overlay driven
+         purely by CSS variables so it can be set before first paint and never
+         interferes with layout, positioning, or input. -->
+    <div id="screenVeil" aria-hidden="true"></div>
+  </body>
+</html>

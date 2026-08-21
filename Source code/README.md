@@ -15,7 +15,8 @@ These are standalone educational examples extracted from the public behavior of 
 - `community-bookmarks.js` — aggregate bookmark options and stable ranked rows.
 - `footer-shell.html` — sanitized semantic footer structure with public navigation labels only.
 - `footer-theme.css` — sanitized theme tokens, progressive footer gradient, and reveal motion.
+- `Student site/` — full public-facing `index.html` and `styles.css` snapshots after removing production runtime and network wiring.
 
 The examples have no network calls, API URLs, database clients, private application templates, user records, credentials, password hashes, private keys, deployment settings, admin recovery code, named exceptions, or private allowlists. The deterministic seed helper is not cryptography and must never be used for passwords, sessions, tokens, or any security decision.
 
-Production `app.js`, the complete `index.html`, the complete `styles.css`, PHP endpoints, service-worker configuration, SQL migrations, private configuration, and test fixtures are intentionally not copied here. The HTML and CSS files in this folder are sanitized excerpts, not the full platform files. The source folder is a teaching surface, not a deployable application.
+Production `app.js`, `admin.html`, `admin.js`, PHP endpoints, service-worker configuration, SQL migrations, private configuration, and test fixtures are intentionally not copied here. The files under `Student site/` are full public-facing HTML/CSS snapshots with the production runtime and network wiring removed; they are not deployable application files. The source folder is a teaching surface, not a deployable application.
