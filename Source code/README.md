@@ -20,6 +20,7 @@ These are standalone educational examples extracted from the public behavior of 
 - `media-performance.js` — responsive image variants, compression profiles, preload planning, and cache policy decisions.
 - `resource-budget.js` — deduplicated ids, bounded request waves, incremental render batches, cache freshness, and request coalescing.
 - `large-bank-session.js` — stable question-bank indexing, bounded session windows, id-keyed answer state, bookmark tombstones, and same-session merging.
+- `Database design/` — sanitized logical table layouts, Mermaid relationship diagrams, relationship traversal, and bounded query-shaped read plans without a database client.
 - `footer-shell.html` — sanitized semantic footer structure with public navigation labels only.
 - `footer-theme.css` — sanitized theme tokens, progressive footer gradient, and reveal motion.
 - `Student site/` — full public-facing `index.html` and `styles.css` snapshots after removing production runtime and network wiring.
