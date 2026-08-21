@@ -1,7 +1,5 @@
 # Bookmarks and review queues
 
-> ملخص عربي: البوك مارك ليس مجرد علامة؛ يمكن تحويله إلى قائمة مراجعة، اختيار الموديول، ثم فتحها كاستكشاف بدون تسجيل محاولة أو كتدريب كامل.
-
 ## Personal bookmarks
 
 A bookmark is stored as a set of stable question identifiers in the student's study record. Toggling a bookmark updates the card immediately, writes local recovery state, and queues a cloud synchronization. Set semantics prevent duplicate identifiers.

@@ -1,7 +1,5 @@
 # Question-bank and content pipeline
 
-> ملخص عربي: السؤال له نطاق أكاديمي ومصدر وإجابة وشرح، ويمكن ربط عدة أسئلة بحالة أو صورة واحدة. التعديل والحذف والاسترجاع كلها عمليات بصلاحيات وسجل تدقيق.
-
 ## Content model
 
 A question contains a stable id, academic scope, chapter, prompt, options, answer metadata, explanation, optional source labels, and optional image references. A shared stimulus stores the case text or image used by several ordered questions.

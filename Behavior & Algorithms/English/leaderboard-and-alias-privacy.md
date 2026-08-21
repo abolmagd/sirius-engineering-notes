@@ -1,7 +1,5 @@
 # Leaderboard and alias privacy
 
-> ملخص عربي: الليدر بورد يعرض اسمًا مستعارًا وأرقامًا مجمعة، وليس الاسم الحقيقي أو البريد، مع Ghost mode لإخفاء الطالب.
-
 ## Public identity
 
 The leaderboard is designed around a public alias. It does not need an email address, password metadata, or raw internal user identifier. Profile responses use an explicit public shape containing only the fields required by the page.

@@ -1,7 +1,5 @@
 # Source-grounded AI explanations
 
-> ملخص عربي: الشرح بالذكاء الاصطناعي لا يعتمد على السؤال وحده؛ يتم ربطه بمصدر تعليمي مفهرس، مع حدود استخدام ومراجعة وتخزين للنتيجة.
-
 ## Purpose
 
 AI explanations are an optional support layer for understanding a question. They do not replace the stored answer key, determine grades, or change a student's saved correctness.

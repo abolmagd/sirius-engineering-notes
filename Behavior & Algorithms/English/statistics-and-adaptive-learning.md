@@ -1,7 +1,5 @@
 # Statistics and adaptive learning
 
-> ملخص عربي: الإحصائيات تفرق بين عدد المحاولات وعدد الأسئلة، وتعرض النتيجة على مستوى الموديول والسبجكت والشابتر، بينما الترتيب التكيفي يستخدم إشارات مفهومة وقابلة للاختبار.
-
 ## Counting model
 
 Each saved answer maintains separate counters for total attempts, correct attempts, and accumulated time. A legacy answer with no explicit counters is interpreted as one attempt so an upgrade never makes a student's history appear to shrink.

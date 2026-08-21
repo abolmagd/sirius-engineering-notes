@@ -1,7 +1,5 @@
 # Moderation, feedback, and auditing
 
-> ملخص عربي: البلاغات والفيدباك ولقطات الشاشة تدخل صناديق مراجعة بصلاحيات، والعمليات الحساسة تُسجل بدون عرض هوية تقنية للطالب كاسم عام.
-
 ## Student feedback
 
 Students can report a question, suggest an explanation correction, or send general feedback. A screenshot is optional and is uploaded only after the user chooses it. The interface tells users not to include passwords, recovery codes, private conversations, or another person's data.

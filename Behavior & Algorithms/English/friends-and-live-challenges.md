@@ -1,7 +1,5 @@
 # Friends and live challenges
 
-> ملخص عربي: الصداقة علاقة متبادلة على الخادم، والتحدي جلسة لها حالات واضحة وتحقق من المشاركين والأسئلة والنتائج.
-
 ## Friend model
 
 Friendship is stored as one normalized pair, independent of who added whom first. Before creating the relationship, the server verifies that the target profile exists and that the user is not trying to add the same account as itself.

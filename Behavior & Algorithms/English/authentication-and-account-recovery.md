@@ -1,7 +1,5 @@
 # Authentication and account recovery
 
-> ملخص عربي: كلمات المرور تُعالج على الخادم، والجلسة لها عمر وصلاحيات، واستعادة كلمة المرور تستخدم رابطًا مؤقتًا أو إجراءً إداريًا مسجلًا بدون كشف هل البريد موجود.
-
 ## Authentication boundary
 
 Production authentication is server-owned. The browser submits credentials over HTTPS and receives a session representation suitable for the client. Password hashes, signing secrets, and database credentials never belong in frontend assets or Git.

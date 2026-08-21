@@ -1,7 +1,5 @@
 # Offline use, synchronization, and concurrency
 
-> ملخص عربي: الإجابة تُحفظ محليًا فورًا، ثم تُرفع للسيرفر. ولو جهازان عدلوا التقدم في نفس الوقت، النظام يكتشف التعارض ويعمل merge محدود بدل ما يمسح بيانات جهاز ببيانات الآخر.
-
 ## Local-first recovery
 
 SIRIUS writes a compact active-session draft before attempting a larger study-state write. The draft contains enough information to reconstruct selected questions, committed answers, position, and session metadata after a refresh.

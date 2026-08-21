@@ -1,7 +1,5 @@
 # PDF study-sheet export
 
-> ملخص عربي: تصدير الـPDF يبني ورقة مذاكرة من الفلاتر الحالية، يحافظ على ترتيب الحالات والصور، ويضع الإجابات في مفتاح منفصل مناسب للطباعة.
-
 ## Goal
 
 The export feature turns the current dashboard selection into a printable study sheet. It is intentionally derived from the same filter state used to start a session, so the on-screen match count and exported scope agree.

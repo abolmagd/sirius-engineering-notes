@@ -1,7 +1,5 @@
 # Architecture and data flow
 
-> ملخص عربي: المنصة تفصل واجهة الطالب عن الخادم، وتخزن التقدم محليًا أولًا ثم تزامنه مع الخادم مع حماية من تعارض الأجهزة.
-
 ## System shape
 
 SIRIUS uses a browser application for the interactive study experience and a same-origin server API for identity, authorization, persistence, shared statistics, and administrative work. Static assets can be cached aggressively; user data and answer keys are never embedded in public HTML.

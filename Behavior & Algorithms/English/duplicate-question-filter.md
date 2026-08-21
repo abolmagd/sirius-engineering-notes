@@ -1,7 +1,5 @@
 # Duplicate-question filtering
 
-> ملخص عربي: التكرار هنا قرار تحريري واضح، وليس تشابهًا آليًا قد يحذف سؤالًا صحيحًا بالخطأ.
-
 ## Why manual grouping
 
 Two medical questions can share many words while testing different facts, and two genuinely duplicate questions can use different wording. A purely text-similarity rule therefore creates unsafe false positives.

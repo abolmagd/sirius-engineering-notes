@@ -1,7 +1,5 @@
 # Personalization and accessibility
 
-> ملخص عربي: الثيمات والأفاتار وحجم الخط والسطوع تفضيلات مرتبطة بالحساب، مع دعم الكيبورد وتقليل الحركة واحترام أحجام الشاشات المختلفة.
-
 ## Appearance preferences
 
 SIRIUS supports light, AMOLED, and ink-sky themes. Theme tokens control surfaces, text, borders, accent colors, and ambient effects as one system rather than applying isolated color overrides.

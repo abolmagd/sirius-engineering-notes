@@ -1,7 +1,5 @@
 # Exam plans and progress
 
-> ملخص عربي: خطة الامتحان يحددها الأدمن كنطاق وتاريخ، ثم يحسب الموقع تقدم الطالب يوميًا من الأسئلة الفريدة داخل النطاق.
-
 ## Plan definition
 
 An exam plan connects a date with a normalized curriculum scope. The scope can contain multiple modules and subjects without depending on the wording or visual order of a dashboard control.
