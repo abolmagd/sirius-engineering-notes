@@ -19,6 +19,9 @@ SIRIUS is a medical-question practice platform. These notes explain how its lear
 - [Source-grounded AI explanations](ai-explanations.md)
 - [Personalization and accessibility](personalization-and-accessibility.md)
 - [Moderation, feedback, and auditing](moderation-feedback-and-auditing.md)
+- [Media, performance, and caching](media-performance-and-caching.md)
+- [Engineering problems and fixes](engineering-problems-and-fixes.md)
+- [Large question banks and session isolation](large-banks-and-session-isolation.md)
 
 The Arabic companion set is in `../Arabic/`. The sanitized, standalone educational source examples are in `../../Source code/`.
 

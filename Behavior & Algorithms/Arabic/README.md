@@ -19,6 +19,9 @@
 - [الشرح المدعوم بالمصادر](ai-explanations.md)
 - [التخصيص وإتاحة الاستخدام](personalization-and-accessibility.md)
 - [البلاغات والمراجعة وسجل التدقيق](moderation-feedback-and-auditing.md)
+- [الصور والأداء والكاش](media-performance-and-caching.md)
+- [أبرز المشاكل والحلول](engineering-problems-and-fixes.md)
+- [بنك الأسئلة الكبير وعزل الجلسات](large-banks-and-session-isolation.md)
 
 ## حدود النشر
 
