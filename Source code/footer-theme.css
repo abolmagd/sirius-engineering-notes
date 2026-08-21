@@ -1,0 +1,137 @@
+/*
+  Sanitized CSS excerpt from the theme-aware footer.
+  It demonstrates layout, a smooth bottom-heavy gradient, and reveal motion.
+  It intentionally omits the rest of the platform stylesheet and its runtime.
+*/
+
+.app-footer {
+  --footer-surface-color: oklch(0.975 0.01 225);
+  --footer-surface-bottom-alpha: 0.88;
+  --footer-ink: oklch(0.23 0.025 225);
+  --footer-ink-muted: oklch(0.34 0.025 225);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: clamp(232px, 27vh, 284px);
+  padding: clamp(78px, 10vh, 112px) 0 56px;
+  place-items: end center;
+}
+
+.app-footer::before {
+  content: "";
+  position: absolute;
+  inset: -96px 0 0;
+  z-index: -1;
+  background: oklch(
+    from var(--footer-surface-color)
+    l c h / var(--footer-surface-bottom-alpha)
+  );
+  -webkit-backdrop-filter: blur(16px) saturate(108%);
+  backdrop-filter: blur(16px) saturate(108%);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    oklch(0 0 0 / 0.02) 14%,
+    oklch(0 0 0 / 0.16) 44%,
+    oklch(0 0 0 / 0.63) 79%,
+    oklch(0 0 0) 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    oklch(0 0 0 / 0.02) 14%,
+    oklch(0 0 0 / 0.16) 44%,
+    oklch(0 0 0 / 0.63) 79%,
+    oklch(0 0 0) 100%
+  );
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 240ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 280ms cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
+}
+
+[data-theme="amoled"] .app-footer {
+  --footer-surface-color: oklch(0.045 0 0);
+  --footer-surface-bottom-alpha: 0.96;
+  --footer-ink: oklch(0.97 0.01 85);
+  --footer-ink-muted: oklch(0.85 0.015 85);
+}
+
+[data-theme="ink-sky"] .app-footer {
+  --footer-surface-color: oklch(0.371 0.011 264.432);
+  --footer-surface-bottom-alpha: 0.86;
+  --footer-ink: oklch(0.985 0.004 264.5);
+  --footer-ink-muted: oklch(0.86 0.006 264.5);
+}
+
+.app-footer-content {
+  display: flex;
+  width: min(100%, 1040px);
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding-inline: clamp(8px, 2vw, 20px);
+}
+
+.app-footer-author,
+.app-footer-nav a {
+  min-height: 44px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--footer-ink-muted);
+  font: inherit;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.app-footer-author {
+  padding: 0 4px;
+  color: var(--footer-ink);
+  cursor: pointer;
+}
+
+.app-footer-author:hover,
+.app-footer-nav a:hover {
+  color: oklch(0.758 0.107 82.584);
+  transform: translateY(-1px);
+}
+
+.app-footer-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2.5vw, 26px);
+}
+
+/* The runtime toggles these classes when the footer enters/leaves view. */
+.app-footer.is-reveal-ready::before {
+  opacity: 0;
+  transform: translateY(44px);
+}
+
+.app-footer.is-visible::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 720px) {
+  .app-footer {
+    min-height: 238px;
+    padding-top: 74px;
+    padding-bottom: 40px;
+  }
+
+  .app-footer-content {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-footer::before,
+  .app-footer-author,
+  .app-footer-nav a {
+    transition: none;
+  }
+}

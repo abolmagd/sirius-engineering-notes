@@ -20,7 +20,7 @@ SIRIUS is a medical-question practice platform. These notes explain how its lear
 - [Personalization and accessibility](personalization-and-accessibility.md)
 - [Moderation, feedback, and auditing](moderation-feedback-and-auditing.md)
 
-The Arabic companion set is in `../Arabic/`. The sanitized, standalone educational source examples are in `../Source code/`.
+The Arabic companion set is in `../Arabic/`. The sanitized, standalone educational source examples are in `../../Source code/`.
 
 ## Publication boundary
 
