@@ -74,3 +74,7 @@ blockScore =
 ## التعقيد والثبات
 
 مولد عشوائي seeded يجعل الجلسة قابلة لإعادة الإنتاج. خلط الكتل الموزون يستخدم exponential-race key ثم sorting بزمن تقريبي `O(n log n)` بدل فحص pool المتناقص في كل مرة.
+
+## أمثلة السورس كود
+
+الريبو العام يحتوي على أمثلة pure functions مرتبطة بالشرح: [`question-presentation.js`](../../Source%20code/question-presentation.js)، و[`question-score.js`](../../Source%20code/question-score.js)، و[`question-timing.js`](../../Source%20code/question-timing.js)، و[`question-engagement.js`](../../Source%20code/question-engagement.js). الأمثلة لا تحتوي على API أو صفوف حسابات أو تخزين فعلي.

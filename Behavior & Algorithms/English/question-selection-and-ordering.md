@@ -93,3 +93,7 @@ Reported questions are deferred behind normal material as whole blocks. They rem
 A seeded pseudo-random generator makes the same saved session reproducible. Weighted block shuffling uses an exponential-race key and sorting, giving approximately `O(n log n)` behavior rather than repeatedly scanning a shrinking pool.
 
 Tests cover deterministic seeds, exact timed counts, chapter proportionality, stable ties, grouped stimuli, reported blocks, and preservation of every selected question exactly once.
+
+## Standalone source examples
+
+The public repository includes the corresponding pure-function examples: [`question-presentation.js`](../../Source%20code/question-presentation.js), [`question-score.js`](../../Source%20code/question-score.js), [`question-timing.js`](../../Source%20code/question-timing.js), and [`question-engagement.js`](../../Source%20code/question-engagement.js). They demonstrate the pipeline without API calls, account rows, or persistence.

@@ -13,6 +13,10 @@ These are standalone educational examples extracted from the public behavior of 
 - `duplicate-filter.js` — deterministic one-survivor selection for explicitly tagged duplicate groups.
 - `source-filter.js` — source checklist matching and stable session-key segments.
 - `community-bookmarks.js` — aggregate bookmark options and stable ranked rows.
+- `question-engagement.js` — aggregate bookmark/report counters keyed by question id.
+- `question-timing.js` — active visible-time state with pause, resume, finish, and normalization.
+- `question-score.js` — explainable difficulty and selection signals from errors, time, changes, choices, bookmarks, and reports.
+- `question-presentation.js` — filter-first display preparation, stimulus grouping, stable ordering, and reported-block deferral.
 - `footer-shell.html` — sanitized semantic footer structure with public navigation labels only.
 - `footer-theme.css` — sanitized theme tokens, progressive footer gradient, and reveal motion.
 - `Student site/` — full public-facing `index.html` and `styles.css` snapshots after removing production runtime and network wiring.
